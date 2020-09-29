@@ -1,5 +1,6 @@
 package com.radiantchamber.walkarama
 
+import com.radiantchamber.walkarama.controllers.StuffController
 import com.radiantchamber.walkarama.controllers.WelcomeController
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router
@@ -16,6 +17,7 @@ fun Router.addRoutes() = apply {
 private fun RouteGroup.webRoutesGroup() {
     get("/", WelcomeController::index).name("welcome")
     // register more web routes here
+    get("/stuff", StuffController::index)
 }
 
 private fun Router.apiRoutes() {
