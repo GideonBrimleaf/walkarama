@@ -1,6 +1,6 @@
-package __PACKAGE__
+package com.radiantchamber.walkarama
 
-import __PACKAGE__.controllers.WelcomeController
+import com.radiantchamber.walkarama.controllers.WelcomeController
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router
 

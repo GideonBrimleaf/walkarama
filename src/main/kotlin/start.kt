@@ -1,4 +1,4 @@
-package __PACKAGE__
+package com.radiantchamber.walkarama
 
 import dev.alpas.Alpas
 

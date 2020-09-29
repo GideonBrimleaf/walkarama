@@ -1,6 +1,6 @@
-package __PACKAGE__.database.migrations
+package com.radiantchamber.walkarama.database.migrations
 
-import __PACKAGE__.entities.Users
+import com.radiantchamber.walkarama.entities.Users
 import dev.alpas.auth.PasswordResetTokens
 import dev.alpas.ozone.migration.Migration
 
