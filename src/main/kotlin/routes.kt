@@ -18,6 +18,7 @@ private fun RouteGroup.webRoutesGroup() {
     get("/", WelcomeController::index).name("welcome")
     // register more web routes here
     get("/stuff", StuffController::index)
+    get("/stuff/<blah>/<someSchtuff>", StuffController::findr)
 }
 
 private fun Router.apiRoutes() {
