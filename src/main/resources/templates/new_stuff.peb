@@ -13,4 +13,15 @@
             </div>
         {% endif %}
         <h1>I'm Mary Poppins Y'All!</h1>
+        <form action="{{ route("create") }}" method="POST">
+        {% csrf %}
+            <label for="numbero" type="number">Enter a number</label>
+            <input name="numbero" id="numbero">
+
+            <label for="inputero">Enter some stuff</label>
+            <input name="inputero" id="inputero" type="text">
+
+            <input type="submit" value="SMASH THAT BUTTON!">
+        </form>
+    </main>
 {% endblock %}

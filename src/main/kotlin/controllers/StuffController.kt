@@ -10,9 +10,16 @@ class StuffController : Controller() {
         call.render("stuff")
     }
 
-    fun findr(call:HttpCall) {
-        val stuff = call.longParam("blah").orAbort()
-        val schtuff = call.stringParam("someSchtuff").orAbort()
+    fun new(call: HttpCall) {
+        println("I am a call!" + call.headers("User-Agent"))
+        call.render("new_stuff")
+    }
+
+    fun create(call:HttpCall) {
+        println(call.params)
+        call.reply("Inspect the console")
+        val stuff = call.longParam("numbero").orAbort()
+        val schtuff = call.stringParam("inputero").orAbort()
         call.render("findr", mapOf("thing" to stuff, "otherThing" to schtuff))
     }
 }
