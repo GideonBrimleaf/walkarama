@@ -13,7 +13,7 @@ runApp() {
     export alpas_root_dir="$APP_PATH"
 
 #Make sure you rename app.jar to the name of your compiled jar file!
-    java -jar app.jar $*
+    java -jar walkarama.jar $*
 
     unset alpas_run_mode
     unset alpas_root_dir
