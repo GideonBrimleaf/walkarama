@@ -1,7 +1,10 @@
 package com.radiantchamber.walkarama.controllers
 
+import com.radiantchamber.walkarama.entities.Stuff
+import com.radiantchamber.walkarama.entities.Stuffs
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
+import dev.alpas.ozone.create
 import dev.alpas.routing.Controller
 
 class StuffController : Controller() {
@@ -18,6 +21,10 @@ class StuffController : Controller() {
     fun create(call:HttpCall) {
         val stuff = call.longParam("numbero").orAbort()
         val schtuff = call.stringParam("inputero").orAbort()
-        call.render("findr", mapOf("thing" to stuff, "otherThing" to schtuff))
+        val thingy = Stuffs.create {
+            it.numbero to stuff
+            it.name to schtuff
+        }
+        call.render("findr", mapOf("thing" to thingy.numbero, "otherThing" to thingy.name))
     }
 }
