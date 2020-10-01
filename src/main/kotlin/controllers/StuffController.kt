@@ -16,8 +16,6 @@ class StuffController : Controller() {
     }
 
     fun create(call:HttpCall) {
-        println(call.params)
-        call.reply("Inspect the console")
         val stuff = call.longParam("numbero").orAbort()
         val schtuff = call.stringParam("inputero").orAbort()
         call.render("findr", mapOf("thing" to stuff, "otherThing" to schtuff))
