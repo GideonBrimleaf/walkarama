@@ -1,20 +1,6 @@
-<!doctype html>
-<html lang="en">
+{% extends "layout/base.peb" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <title>🚀 Alpas</title>
-    <style>
-        #menu-toggle:checked + #menu {
-            display: block;
-        }
-    </style>
-</head>
-
-<body class="antialiased bg-gray-200 h-full">
-<div id="app">
+{% block content %}
     <main>
         {% if hasFlash('success') %}
             <div class="max-w-4xl mt-10 mx-auto pt-10 w-full">
@@ -27,9 +13,5 @@
             </div>
         {% endif %}
         <h1>I'm Mary Poppins Y'All!</h1>
-{#        {% block content %} {% endblock %}#}
     </main>
-</div>
-<script src="{{ mix('js/app.js') }}"></script>
-</body>
-</html>
+{% endblock %}
