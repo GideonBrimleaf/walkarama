@@ -6,11 +6,13 @@ import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
 import dev.alpas.routing.Controller
+import me.liuwj.ktorm.entity.findAll
 
 class StuffController : Controller() {
     fun index(call: HttpCall) {
         println("I am a call!" + call.headers("User-Agent"))
-        call.render("stuff")
+        val results = Stuffs.findAll()
+        call.render("stuff", "things" to results)
     }
 
     fun new(call: HttpCall) {

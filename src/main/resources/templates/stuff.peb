@@ -13,4 +13,8 @@
             </div>
         {% endif %}
         <h1>I'm Mary Poppins Y'All!</h1>
+        {% for thing in things %}
+        <p>The word is {{ thing.name }}</p>
+        <p>The number is {{ thing.numbero }}</p>
+        {% endfor %}
 {% endblock %}
