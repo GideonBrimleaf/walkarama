@@ -20,6 +20,7 @@ private fun RouteGroup.webRoutesGroup() {
     get("/stuff", StuffController::index)
     get("/stuff/new", StuffController::new).name("new")
     post("/stuff", StuffController::create).name("create")
+    delete("/stuff/<id>", StuffController::delete).name("delete")
 }
 
 private fun Router.apiRoutes() {

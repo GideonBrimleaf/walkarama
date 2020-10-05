@@ -16,5 +16,12 @@
         {% for thing in things %}
         <p>The word is {{ thing.name }}</p>
         <p>The number is {{ thing.numbero }}</p>
+        <form action="{{ route('delete', {"id": thing.id}) }}" method="POST">
+        {% csrf %}
+            <input type="hidden" name="_method" value="delete"/>
+            <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
+                Delete
+            </button>
+        </form>
         {% endfor %}
 {% endblock %}
