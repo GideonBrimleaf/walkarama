@@ -6,6 +6,13 @@
         <ul>
             {% for walk in walks %}
             <li>{{ walk.name }} - {{ walk.distance }}<li>
+            <form action="{{ route('walks.delete', {"id": walk.id}) }}" method="POST">
+            {% csrf %}
+            <input type="hidden" name="_method" value="delete"/>
+                <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
+                    Delete
+                </button>
+            </form>
             {% endfor %}
         </ul>
     </main>

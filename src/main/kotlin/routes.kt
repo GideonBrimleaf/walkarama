@@ -28,7 +28,8 @@ private fun RouteGroup.webRoutesGroup() {
 }
 
 private fun RouteGroup.addWalksRoutes() {
-   get("/", WalkController::index).name("list")
+    get("/", WalkController::index).name("list")
+    delete("/<id>", WalkController::delete).name("delete")
 }
 
 private fun Router.apiRoutes() {
