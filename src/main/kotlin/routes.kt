@@ -1,6 +1,7 @@
 package com.radiantchamber.walkarama
 
 import com.radiantchamber.walkarama.controllers.StuffController
+import com.radiantchamber.walkarama.controllers.WalkController
 import com.radiantchamber.walkarama.controllers.WelcomeController
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router
@@ -21,6 +22,13 @@ private fun RouteGroup.webRoutesGroup() {
     get("/stuff/new", StuffController::new).name("new")
     post("/stuff", StuffController::create).name("create")
     delete("/stuff/<id>", StuffController::delete).name("delete")
+    group("/walks") {
+        addWalksRoutes()
+    }.name("walks")
+}
+
+private fun RouteGroup.addWalksRoutes() {
+   get("/", WalkController::index).name("list")
 }
 
 private fun Router.apiRoutes() {

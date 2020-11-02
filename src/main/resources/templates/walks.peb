@@ -1,0 +1,12 @@
+{% extends "layout/base.peb" %}
+
+{% block content %}
+    <main>
+        <h1>Here's your Walks!</h1>
+        <ul>
+            {% for walk in walks %}
+            <li>{walk.name} - {walk.distance}<li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}
