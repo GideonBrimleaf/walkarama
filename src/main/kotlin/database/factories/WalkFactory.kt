@@ -7,7 +7,7 @@ import com.radiantchamber.walkarama.entities.Walks
 import java.time.Instant
 import java.util.concurrent.TimeUnit
 
-internal class WalkFactory() : EntityFactory<Walk, Walks>() {
+internal object WalkFactory : EntityFactory<Walk, Walks>() {
     override val table = Walks
     
     override fun entity(): Walk {

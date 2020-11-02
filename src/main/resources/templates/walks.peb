@@ -5,7 +5,7 @@
         <h1>Here's your Walks!</h1>
         <ul>
             {% for walk in walks %}
-            <li>{walk.name} - {walk.distance}<li>
+            <li>{{ walk.name }} - {{ walk.distance }}<li>
             {% endfor %}
         </ul>
     </main>
