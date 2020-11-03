@@ -1,0 +1,19 @@
+{% extends "layout/base.peb" %}
+{% block content %}
+    <main>
+        <form action="{{ route('walks.update', {"id" : walk.id}) }}" method="POST">
+        {% csrf %}
+            <input type="hidden" name="_method" value="patch"/>
+
+            <label for="walk-name">Name:</label>
+            <input id="walk-name" type="text" name="walk-name" value="{{ walk.name }}">
+
+            <label for="walk-distance">Total Distance:</label>
+            <input id="walk-distance" type="number" name="walk-distance" value="{{ walk.totalDistance }}">
+
+            <label for="walk-travelled">Add Steps:</label>
+            <input id="walk-travelled" type="number" name="walk-travelled" value="0">
+            <input type="submit">
+        </form>
+    </main>
+{% endblock %}

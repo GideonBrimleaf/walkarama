@@ -5,14 +5,17 @@
         <h1>Here's your Walks!</h1>
         <ul>
             {% for walk in walks %}
-            <li>{{ walk.name }} - {{ walk.distance }}<li>
-            <form action="{{ route('walks.delete', {"id": walk.id}) }}" method="POST">
-            {% csrf %}
-            <input type="hidden" name="_method" value="delete"/>
-                <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
-                    Delete
-                </button>
-            </form>
+            <li>{{ walk.name }} - {{ walk.totalDistance }}
+                <p>Distance left: {{ walk.distanceLeftToTravel }}</p>
+                <form action="{{ route('walks.delete', {"id": walk.id}) }}" method="POST">
+                {% csrf %}
+                <input type="hidden" name="_method" value="delete"/>
+                    <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
+                        Delete
+                    </button>
+                </form>
+                <a href="{{ route('walks.edit', {"id": walk.id}) }}">Add Some Steps!</a>
+            <li>
             {% endfor %}
         </ul>
     </main>

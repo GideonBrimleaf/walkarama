@@ -11,7 +11,8 @@ import java.time.Instant
 interface Walk : OzoneEntity<Walk> {
     var id: Long
     var name: String?
-    var distance: Double
+    var totalDistance: Double
+    var distanceLeftToTravel: Double
     var createdAt: Instant?
     var updatedAt: Instant?
 
@@ -21,7 +22,8 @@ interface Walk : OzoneEntity<Walk> {
 object Walks : OzoneTable<Walk>("walks") {
     val id by bigIncrements()
     val name by string("name").size(150).nullable().bindTo { it.name }
-    val distance by double("distance").nullable().bindTo { it.distance }
+    val totalDistance by double("total_distance").nullable().bindTo { it.totalDistance }
+    val distanceLeftToTravel by double("distance_left_to_travel").nullable().bindTo { it.distanceLeftToTravel }
     val createdAt by timestamp("created_at").useCurrent().bindTo { it.createdAt }
     val updatedAt by timestamp("updated_at").useCurrent().bindTo { it.updatedAt }
 }
