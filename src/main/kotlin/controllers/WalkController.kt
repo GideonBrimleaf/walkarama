@@ -32,10 +32,16 @@ class WalkController : Controller() {
     fun update(call: HttpCall) {
         val id = call.longParam("id").orAbort()
         val foundWalk = Walks.findOrFail(id)
+        val distancedTravelled = call.stringParam("walk-travelled").orAbort().toDouble()
 
         foundWalk.name = call.stringParam("walk-name")
         foundWalk.totalDistance = call.stringParam("walk-distance").orAbort().toDouble()
-        foundWalk.distanceLeftToTravel -= call.stringParam("walk-travelled").orAbort().toDouble()
+        if (distancedTravelled <= foundWalk.distanceLeftToTravel) {
+            foundWalk.distanceLeftToTravel -= distancedTravelled
+        } else {
+            foundWalk.distanceLeftToTravel = 0.0
+        }
+
         foundWalk.updatedAt = Instant.now()
 
         foundWalk.flushChanges()

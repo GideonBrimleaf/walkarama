@@ -6,7 +6,12 @@
         <ul>
             {% for walk in walks %}
             <li>{{ walk.name }} - {{ walk.totalDistance }}
+                {% if walk.distanceLeftToTravel != 0 %}
                 <p>Distance left: {{ walk.distanceLeftToTravel }}</p>
+                {% else %}
+                <p>Distance left: Completed!</p>
+                {% endif %}
+                <a href="{{ route('walks.edit', {"id": walk.id}) }}">Add Some Steps!</a>
                 <form action="{{ route('walks.delete', {"id": walk.id}) }}" method="POST">
                 {% csrf %}
                 <input type="hidden" name="_method" value="delete"/>
@@ -14,7 +19,6 @@
                         Delete
                     </button>
                 </form>
-                <a href="{{ route('walks.edit', {"id": walk.id}) }}">Add Some Steps!</a>
             <li>
             {% endfor %}
         </ul>
