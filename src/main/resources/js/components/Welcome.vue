@@ -1,5 +1,5 @@
 <template>
-    <div>Hello, __APP__NAME!</div>
+    <div>Hello, This is the Vue Component!</div>
 </template>
 
 <script>

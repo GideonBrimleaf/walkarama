@@ -3,6 +3,7 @@
 {% block content %}
     <main>
         <h1>Here's your Walks!</h1>
+        <welcome></welcome>
         <ul>
             {% for walk in walks %}
             <li>{{ walk.name }} - {{ walk.totalDistance }}
