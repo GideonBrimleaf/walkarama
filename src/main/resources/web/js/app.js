@@ -1917,6 +1917,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
   data: function data() {
@@ -3143,7 +3145,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "map-container" }, [
-    _c("h1", [_vm._v("Hello, This is the Map Component!")]),
+    _c("h1", [_vm._v("Create A New Walk")]),
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
@@ -3157,7 +3159,11 @@ var render = function() {
               "m"
           )
         ])
-      : _vm._e()
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.distanceInMetres ? _c("h3", [_vm._v("Create a Walk")]) : _vm._e(),
+    _vm._v(" "),
+    _c("input", { attrs: { type: "submit", value: "SMASH THAT BUTTON!" } })
   ])
 }
 var staticRenderFns = []

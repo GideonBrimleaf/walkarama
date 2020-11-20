@@ -1,6 +1,5 @@
 {% extends "layout/base.peb" %}
 
     {% block content %}
-        <h1>New Walks to Come!</h1>
         <google-map></google-map>
     {% endblock %}

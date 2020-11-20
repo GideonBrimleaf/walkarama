@@ -1,9 +1,11 @@
 <template>
     <section class="map-container">
-        <h1>Hello, This is the Map Component!</h1>
+        <h1>Create A New Walk</h1>
         <br>
         <div id="map" ref="mapContainer"></div>
         <h3 v-if="distanceInMetres">The distance between the two points is {{this.distanceInMetres}}m</h3>
+        <h3 v-if="!distanceInMetres">Create a Walk</h3>
+        <input type="submit" value="SMASH THAT BUTTON!">
     </section>
 </template>
 
