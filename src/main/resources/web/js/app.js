@@ -1916,6 +1916,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
   data: function data() {
@@ -1923,6 +1924,13 @@ __webpack_require__.r(__webpack_exports__);
       markers: [],
       map: null
     };
+  },
+  computed: {
+    distanceInMetres: function distanceInMetres() {
+      if (this.markers.length === 2) {
+        return google.maps.geometry.spherical.computeDistanceBetween(this.markers[0].getPosition(), this.markers[1].getPosition());
+      }
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -1944,6 +1952,8 @@ __webpack_require__.r(__webpack_exports__);
       document.querySelector('head').appendChild(script);
     },
     initMap: function initMap() {
+      var _this2 = this;
+
       this.map = new google.maps.Map(this.$refs.mapContainer, {
         center: {
           lat: 51.513329,
@@ -1951,6 +1961,34 @@ __webpack_require__.r(__webpack_exports__);
         },
         zoom: 14
       });
+      this.map.addListener('click', function (event) {
+        return _this2.addMarker(event);
+      });
+    },
+    addMarker: function addMarker(event) {
+      var _this3 = this;
+
+      var position = event.latLng.toJSON();
+
+      if (this.markers.length < 2) {
+        var marker = new google.maps.Marker({
+          position: {
+            lat: position.lat,
+            lng: position.lng
+          },
+          draggable: true,
+          map: this.map,
+          title: "I'm Mary Poppins Y'All!",
+          id: position.lat + '' + position.lng
+        });
+        this.markers.push(marker);
+        marker.addListener('click', function () {
+          _this3.markers = _this3.markers.filter(function (mapMarker) {
+            return mapMarker.id === marker.id;
+          });
+          marker.setMap(null);
+        });
+      }
     }
   }
 });
@@ -1988,7 +2026,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#map[data-v-31bc142e] {\n  height: 100%;\n}\n.map-container[data-v-31bc142e] {\n  height: 100%;\n}\n\n", ""]);
+exports.push([module.i, "#map[data-v-31bc142e] {\n  height: 90%;\n}\n.map-container[data-v-31bc142e] {\n  height: 90%;\n}\n\n", ""]);
 
 // exports
 
@@ -3109,7 +3147,17 @@ var render = function() {
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _c("div", { ref: "mapContainer", attrs: { id: "map" } })
+    _c("div", { ref: "mapContainer", attrs: { id: "map" } }),
+    _vm._v(" "),
+    _vm.distanceInMetres
+      ? _c("h3", [
+          _vm._v(
+            "The distance between the two points is " +
+              _vm._s(this.distanceInMetres) +
+              "m"
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
