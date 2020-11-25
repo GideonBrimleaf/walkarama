@@ -21,10 +21,10 @@
         computed: {
           distanceInMetres: function() {
             if (this.markers.length === 2) {
-            return google.maps.geometry.spherical.computeDistanceBetween(
+            return parseFloat(google.maps.geometry.spherical.computeDistanceBetween(
               this.markers[0].getPosition(),
               this.markers[1].getPosition()
-            )}
+            ).toFixed(2))}
           }
         },
         mounted() {
