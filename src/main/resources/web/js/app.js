@@ -1920,6 +1920,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -1936,7 +1940,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     distanceInMetres: function distanceInMetres() {
       if (this.markers.length === 2) {
-        return parseFloat(google.maps.geometry.spherical.computeDistanceBetween(this.markers[0].getPosition(), this.markers[1].getPosition()).toFixed(2));
+        var result = parseFloat(google.maps.geometry.spherical.computeDistanceBetween(this.markers[0].getPosition(), this.markers[1].getPosition()).toFixed(2));
+        this.form.distanceInMetres = result;
+        return result;
       }
     }
   },
@@ -3148,9 +3154,42 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !_vm.distanceInMetres ? _c("h3", [_vm._v("Create a Walk")]) : _vm._e(),
+    _vm.distanceInMetres
+      ? _c("form", [
+          _c("label", { attrs: { for: "walk-name" } }, [
+            _vm._v("Give your walk a name:")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.name,
+                expression: "form.name"
+              }
+            ],
+            attrs: { id: "walk-name", type: "text" },
+            domProps: { value: _vm.form.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "name", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "submit", value: "SMASH THAT BUTTON!" }
+          })
+        ])
+      : _vm._e(),
     _vm._v(" "),
-    _c("input", { attrs: { type: "submit", value: "SMASH THAT BUTTON!" } })
+    !_vm.distanceInMetres
+      ? _c("h3", [_vm._v("Click on the map to create a walk")])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

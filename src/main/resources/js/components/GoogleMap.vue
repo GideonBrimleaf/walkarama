@@ -4,8 +4,12 @@
         <br>
         <div id="map" ref="mapContainer"></div>
         <h3 v-if="distanceInMetres">The distance between the two points is {{this.distanceInMetres}}m</h3>
-        <h3 v-if="!distanceInMetres">Create a Walk</h3>
-        <input type="submit" value="SMASH THAT BUTTON!">
+        <form v-if="distanceInMetres">
+          <label for="walk-name">Give your walk a name:</label>
+          <input id="walk-name" type="text" v-model="form.name">
+          <input type="submit" value="SMASH THAT BUTTON!">
+        </form>
+        <h3 v-if="!distanceInMetres">Click on the map to create a walk</h3>
     </section>
 </template>
 
@@ -23,10 +27,16 @@
         computed: {
           distanceInMetres: function() {
             if (this.markers.length === 2) {
-            return parseFloat(google.maps.geometry.spherical.computeDistanceBetween(
+
+            const result = parseFloat(google.maps.geometry.spherical.computeDistanceBetween(
               this.markers[0].getPosition(),
               this.markers[1].getPosition()
-            ).toFixed(2))}
+            ).toFixed(2))
+
+            this.form.distanceInMetres = result
+
+            return result
+            }
           }
         },
         mounted() {
