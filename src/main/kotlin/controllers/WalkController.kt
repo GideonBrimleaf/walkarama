@@ -49,7 +49,11 @@ class WalkController : Controller() {
         call.redirect().toRouteNamed("walks.list")
     }
 
-    fun new(call:HttpCall){
+    fun new(call:HttpCall) {
         call.render("walk_new")
+    }
+
+    fun create(call:HttpCall) {
+        call.reply("This will create a new walk!")
     }
 }

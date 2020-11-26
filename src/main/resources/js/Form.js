@@ -28,8 +28,6 @@ class Form {
 
   submit(endpoint, requestType = 'post') {
       this.isWorking = true
-      console.log('original data', this.originalData)
-      console.log('processed data', this.data()) 
       return axios[requestType](endpoint, this.data())
           .catch(this.onFail.bind(this))
           .then(this.onSuccess.bind(this))

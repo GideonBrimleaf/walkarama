@@ -2005,9 +2005,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     createWalk: function createWalk() {
-      this.form.post("/walks");
-      this.form.reset();
-      window.location = 'walks';
+      this.form.post("/walks").then(this.form.reset()).then(window.location.href = '/walks');
     }
   }
 });
@@ -3160,42 +3158,47 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.distanceInMetres
-      ? _c("form", [
-          _c("label", { attrs: { for: "walk-name" } }, [
-            _vm._v("Give your walk a name:")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.name,
-                expression: "form.name"
-              }
-            ],
-            attrs: { id: "walk-name", type: "text", required: "" },
-            domProps: { value: _vm.form.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "name", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            attrs: { type: "submit", value: "SMASH THAT BUTTON!" },
+      ? _c(
+          "form",
+          {
             on: {
               submit: function($event) {
                 $event.preventDefault()
                 return _vm.createWalk($event)
               }
             }
-          })
-        ])
+          },
+          [
+            _c("label", { attrs: { for: "walk-name" } }, [
+              _vm._v("Give your walk a name:")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.name,
+                  expression: "form.name"
+                }
+              ],
+              attrs: { id: "walk-name", type: "text", required: "" },
+              domProps: { value: _vm.form.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "submit", value: "SMASH THAT BUTTON!" }
+            })
+          ]
+        )
       : _vm._e(),
     _vm._v(" "),
     !_vm.distanceInMetres
@@ -15519,8 +15522,6 @@ var Form = /*#__PURE__*/function () {
 
       var requestType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'post';
       this.isWorking = true;
-      console.log('original data', this.originalData);
-      console.log('processed data', this.data());
       return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this))["finally"](function () {
         return _this2.isWorking = false;
       });
