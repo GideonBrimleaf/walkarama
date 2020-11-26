@@ -6,8 +6,8 @@
         <h3 v-if="distanceInMetres">The distance between the two points is {{this.distanceInMetres}}m</h3>
         <form v-if="distanceInMetres">
           <label for="walk-name">Give your walk a name:</label>
-          <input id="walk-name" type="text" v-model="form.name">
-          <input type="submit" value="SMASH THAT BUTTON!">
+          <input id="walk-name" type="text" v-model="form.name" required>
+          <input @submit.prevent="createWalk" type="submit" value="SMASH THAT BUTTON!">
         </form>
         <h3 v-if="!distanceInMetres">Click on the map to create a walk</h3>
     </section>
@@ -87,6 +87,11 @@
                   marker.setMap(null)
                 })
               }
+            },
+            createWalk: function() {
+              this.form.post(`/walks`)
+              this.form.reset()
+              window.location = 'walks'
             }
         }
     }

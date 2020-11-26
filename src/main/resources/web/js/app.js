@@ -2003,6 +2003,11 @@ __webpack_require__.r(__webpack_exports__);
           marker.setMap(null);
         });
       }
+    },
+    createWalk: function createWalk() {
+      this.form.post("/walks");
+      this.form.reset();
+      window.location = 'walks';
     }
   }
 });
@@ -3169,7 +3174,7 @@ var render = function() {
                 expression: "form.name"
               }
             ],
-            attrs: { id: "walk-name", type: "text" },
+            attrs: { id: "walk-name", type: "text", required: "" },
             domProps: { value: _vm.form.name },
             on: {
               input: function($event) {
@@ -3182,7 +3187,13 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("input", {
-            attrs: { type: "submit", value: "SMASH THAT BUTTON!" }
+            attrs: { type: "submit", value: "SMASH THAT BUTTON!" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.createWalk($event)
+              }
+            }
           })
         ])
       : _vm._e(),
