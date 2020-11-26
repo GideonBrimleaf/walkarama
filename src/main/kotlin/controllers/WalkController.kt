@@ -3,12 +3,11 @@ package com.radiantchamber.walkarama.controllers
 import com.radiantchamber.walkarama.entities.Walks
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
+import dev.alpas.ozone.create
 import dev.alpas.ozone.findOrFail
 import dev.alpas.routing.Controller
 import me.liuwj.ktorm.dsl.delete
 import me.liuwj.ktorm.dsl.eq
-import me.liuwj.ktorm.dsl.minus
-import me.liuwj.ktorm.dsl.update
 import me.liuwj.ktorm.entity.findAll
 import java.time.Instant
 
@@ -54,6 +53,11 @@ class WalkController : Controller() {
     }
 
     fun create(call:HttpCall) {
-        call.reply("This will create a new walk!")
+        Walks.create {
+            it.name to call.jsonBody?.get("name")
+            it.totalDistance to call.jsonBody?.get("distanceInMetres")
+            it.distanceLeftToTravel to call.jsonBody?.get("distanceInMetres")
+        }
+        call.redirect().toRouteNamed("walks.list")
     }
 }
