@@ -10,12 +10,14 @@
 </template>
 
 <script>
+    import Form from '../form'
     export default {
         name: "GoogleMap",
         data() {
             return {
               markers: [],
-              map: null
+              map: null,
+              form: new Form({name: '', distanceInMetres: 0})
             }
         },
         computed: {
