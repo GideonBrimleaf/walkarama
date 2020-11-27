@@ -58,6 +58,7 @@ class WalkController : Controller() {
             it.totalDistance to call.jsonBody?.get("distanceInMetres")
             it.distanceLeftToTravel to call.jsonBody?.get("distanceInMetres")
         }
-        call.redirect().toRouteNamed("walks.list")
+
+        call.acknowledge(201)
     }
 }

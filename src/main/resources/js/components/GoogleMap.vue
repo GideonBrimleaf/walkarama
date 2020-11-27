@@ -4,7 +4,7 @@
         <br>
         <div id="map" ref="mapContainer"></div>
         <h3 v-if="distanceInMetres">The distance between the two points is {{this.distanceInMetres}}m</h3>
-        <form v-if="distanceInMetres" @submit.prevent="createWalk">
+        <form v-if="distanceInMetres" @submit="createWalk" action="/walks">
           <label for="walk-name">Give your walk a name:</label>
           <input id="walk-name" type="text" v-model="form.name" required>
           <input type="submit" value="SMASH THAT BUTTON!">
@@ -90,8 +90,6 @@
             },
             createWalk: function() {
               this.form.post(`/walks`)
-              .then(this.form.reset())
-              .then(window.location.href = '/walks')
             }
         }
     }

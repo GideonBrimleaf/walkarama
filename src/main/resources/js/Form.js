@@ -31,7 +31,8 @@ class Form {
       return axios[requestType](endpoint, this.data())
           .catch(this.onFail.bind(this))
           .then(this.onSuccess.bind(this))
-          .finally(() => this.isWorking = false)
+          .then(() => this.isWorking = false)
+          .then(() => window.location.href = window.location.origin + endpoint)
   }
 
   onSuccess(response) {

@@ -2005,7 +2005,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     createWalk: function createWalk() {
-      this.form.post("/walks").then(this.form.reset()).then(window.location.href = '/walks');
+      this.form.post("/walks");
     }
   }
 });
@@ -3160,14 +3160,7 @@ var render = function() {
     _vm.distanceInMetres
       ? _c(
           "form",
-          {
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.createWalk($event)
-              }
-            }
-          },
+          { attrs: { action: "/walks" }, on: { submit: _vm.createWalk } },
           [
             _c("label", { attrs: { for: "walk-name" } }, [
               _vm._v("Give your walk a name:")
@@ -15522,8 +15515,10 @@ var Form = /*#__PURE__*/function () {
 
       var requestType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'post';
       this.isWorking = true;
-      return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this))["finally"](function () {
+      return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this)).then(function () {
         return _this2.isWorking = false;
+      }).then(function () {
+        return window.location.href = window.location.origin + endpoint;
       });
     }
   }, {
