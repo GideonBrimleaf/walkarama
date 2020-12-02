@@ -1913,17 +1913,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -2031,7 +2020,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#map[data-v-31bc142e] {\n  height: 90%;\n}\n.map-container[data-v-31bc142e] {\n  height: 90%;\n}\n\n", ""]);
+exports.push([module.i, "#map[data-v-31bc142e] {\n  height: 70vh;\n}\n\n", ""]);
 
 // exports
 
@@ -3147,64 +3136,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "map-container" }, [
-    _c("h1", [_vm._v("Create A New Walk")]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { ref: "mapContainer", attrs: { id: "map" } }),
-    _vm._v(" "),
-    _vm.distanceInMetres
-      ? _c("h3", [
-          _vm._v(
-            "The distance between the two points is " +
-              _vm._s(this.distanceInMetres) +
-              "m"
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.distanceInMetres
-      ? _c(
-          "form",
-          { attrs: { action: "/walks" }, on: { submit: _vm.createWalk } },
-          [
-            _c("label", { attrs: { for: "walk-name" } }, [
-              _vm._v("Give your walk a name:")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.name,
-                  expression: "form.name"
-                }
-              ],
-              attrs: { id: "walk-name", type: "text", required: "" },
-              domProps: { value: _vm.form.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "name", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "submit", value: "SMASH THAT BUTTON!" }
-            })
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.distanceInMetres
-      ? _c("h3", [_vm._v("Click on the map to create a walk")])
-      : _vm._e()
-  ])
+  return _c("div", { ref: "mapContainer", attrs: { id: "map" } })
 }
 var staticRenderFns = []
 render._withStripped = true

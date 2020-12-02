@@ -1,16 +1,5 @@
 <template>
-    <section class="map-container">
-        <h1>Create A New Walk</h1>
-        <br>
-        <div id="map" ref="mapContainer"></div>
-        <h3 v-if="distanceInMetres">The distance between the two points is {{this.distanceInMetres}}m</h3>
-        <form v-if="distanceInMetres" @submit="createWalk" action="/walks">
-          <label for="walk-name">Give your walk a name:</label>
-          <input id="walk-name" type="text" v-model="form.name" required>
-          <input type="submit" value="SMASH THAT BUTTON!">
-        </form>
-        <h3 v-if="!distanceInMetres">Click on the map to create a walk</h3>
-    </section>
+    <div id="map" ref="mapContainer"></div>
 </template>
 
 <script>
@@ -18,7 +7,7 @@
     export default {
         name: "GoogleMap",
         props: {
-          existingWalk: {type: object, required: false, default: () => {}}
+          existingWalk: {type: Object, required: false, default: () => {}}
         },
         data() {
             return {
@@ -100,11 +89,7 @@
 
 <style scoped>
     #map {
-        height: 90%;
-    }
-
-    .map-container {
-        height: 90%;
+        height: 70vh;
     }
 
 </style>
