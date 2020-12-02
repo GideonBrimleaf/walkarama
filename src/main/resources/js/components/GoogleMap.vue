@@ -17,6 +17,9 @@
     import Form from '../form'
     export default {
         name: "GoogleMap",
+        props: {
+          existingWalk: {type: Array, required: false, default: () => []}
+        },
         data() {
             return {
               markers: [],

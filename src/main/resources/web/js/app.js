@@ -1927,6 +1927,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
+  props: {
+    existingWalk: {
+      type: Array,
+      required: false,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
   data: function data() {
     return {
       markers: [],
