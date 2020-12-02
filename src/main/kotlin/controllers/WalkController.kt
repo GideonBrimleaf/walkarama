@@ -9,12 +9,15 @@ import dev.alpas.routing.Controller
 import me.liuwj.ktorm.dsl.delete
 import me.liuwj.ktorm.dsl.eq
 import me.liuwj.ktorm.entity.findAll
+import me.liuwj.ktorm.entity.findOne
 import java.time.Instant
 
 class WalkController : Controller() {
     fun index(call: HttpCall) {
-        val allWalks = Walks.findAll()
-        call.render("walks", "walks" to allWalks)
+        val foundWalk = Walks.findOne {
+            it.name eq "My Awesome Walk"
+        }
+        call.render("walks", "walk" to foundWalk)
     }
 
     fun delete(call: HttpCall) {

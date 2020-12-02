@@ -3,8 +3,8 @@
 {% block content %}
     <main>
         <h1>Here's your Walks!</h1>
+        <google-map walk :existing-walk="{{ walk | json_encode }}"></google-map>
         <ul>
-            {% for walk in walks %}
             <li>{{ walk.name }} - {{ walk.totalDistance }}
                 {% if walk.distanceLeftToTravel != 0 %}
                 <p>Distance left: {{ walk.distanceLeftToTravel }}</p>
@@ -20,7 +20,6 @@
                     </button>
                 </form>
             <li>
-            {% endfor %}
         </ul>
     </main>
 {% endblock %}

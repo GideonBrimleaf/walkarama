@@ -1929,11 +1929,9 @@ __webpack_require__.r(__webpack_exports__);
   name: "GoogleMap",
   props: {
     existingWalk: {
-      type: Array,
+      type: Object,
       required: false,
-      "default": function _default() {
-        return [];
-      }
+      "default": function _default() {}
     }
   },
   data: function data() {

@@ -18,7 +18,7 @@
     export default {
         name: "GoogleMap",
         props: {
-          existingWalk: {type: Array, required: false, default: () => []}
+          existingWalk: {type: object, required: false, default: () => {}}
         },
         data() {
             return {
