@@ -11,7 +11,7 @@
         },
         data() {
             return {
-              markers: this.existingWalk ? ["There will be some stuff here"] : [],
+              markers: [],
               map: null,
               form: new Form({name: '', distanceInMetres: 0})
             }
@@ -55,11 +55,23 @@
                 zoom: 14
               });
 
-              this.map.addListener('click', (event) => this.addMarker(event))
-            },
-            addMarker: function(event) {
-              const position = event.latLng.toJSON()
+              this.map.addListener('click', (event) => {
+                console.log('click event lat long is', event.latLng.toJSON())
+                const position = event.latLng.toJSON() 
+                this.addMarker(position)
+              })
 
+              if (this.existingWalk) {
+                this.initMarkers()
+              }
+            },
+            initMarkers: function() {
+              const startPoint = {lat: this.existingWalk.startPointLat, lng: this.existingWalk.startPointLong}
+              this.addMarker(startPoint)
+              const endPoint = {lat: this.existingWalk.endPointLat, lng: this.existingWalk.endPointLong}
+              this.addMarker(endPoint)
+            },
+            addMarker: function(position) {
               if (this.markers.length < 2) {
                 const marker = new google.maps.Marker({
                   position: {

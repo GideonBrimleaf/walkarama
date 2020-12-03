@@ -1925,7 +1925,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      markers: this.existingWalk ? ["There will be some stuff here"] : [],
+      markers: [],
       map: null,
       form: new _form__WEBPACK_IMPORTED_MODULE_0__["default"]({
         name: '',
@@ -1972,13 +1972,30 @@ __webpack_require__.r(__webpack_exports__);
         zoom: 14
       });
       this.map.addListener('click', function (event) {
-        return _this2.addMarker(event);
-      });
-    },
-    addMarker: function addMarker(event) {
-      var _this3 = this;
+        console.log('click event lat long is', event.latLng.toJSON());
+        var position = event.latLng.toJSON();
 
-      var position = event.latLng.toJSON();
+        _this2.addMarker(position);
+      });
+
+      if (this.existingWalk) {
+        this.initMarkers();
+      }
+    },
+    initMarkers: function initMarkers() {
+      var startPoint = {
+        lat: this.existingWalk.startPointLat,
+        lng: this.existingWalk.startPointLong
+      };
+      this.addMarker(startPoint);
+      var endPoint = {
+        lat: this.existingWalk.endPointLat,
+        lng: this.existingWalk.endPointLong
+      };
+      this.addMarker(endPoint);
+    },
+    addMarker: function addMarker(position) {
+      var _this3 = this;
 
       if (this.markers.length < 2) {
         var marker = new google.maps.Marker({
