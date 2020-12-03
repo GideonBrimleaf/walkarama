@@ -4,6 +4,7 @@ import com.radiantchamber.walkarama.entities.Walks
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
+import dev.alpas.ozone.findOneOrFail
 import dev.alpas.ozone.findOrFail
 import dev.alpas.routing.Controller
 import me.liuwj.ktorm.dsl.*
@@ -13,12 +14,16 @@ import java.time.Instant
 
 class WalkController : Controller() {
     fun index(call: HttpCall) {
-        val latestWalk = Walks.select(Walks.createdAt).orderBy(Walks.createdAt.desc()).first()[Walks.createdAt].orAbort()
+        val latestWalk = Walks.select(Walks.createdAt).orderBy(Walks.createdAt.desc()).firstOrNull()
 
-        val foundWalk = Walks.findOne {
-            it.createdAt eq latestWalk
+        if (latestWalk != null) {
+            val foundWalk = Walks.findOne {
+                it.createdAt eq latestWalk[Walks.createdAt]!!
+            }
+            call.render("walks", "walk" to foundWalk)
+        } else {
+            call.redirect().toRouteNamed("walks.new")
         }
-        call.render("walks", "walk" to foundWalk)
     }
 
     fun delete(call: HttpCall) {
