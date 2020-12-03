@@ -6,16 +6,17 @@ import dev.alpas.orAbort
 import dev.alpas.ozone.create
 import dev.alpas.ozone.findOrFail
 import dev.alpas.routing.Controller
-import me.liuwj.ktorm.dsl.delete
-import me.liuwj.ktorm.dsl.eq
+import me.liuwj.ktorm.dsl.*
 import me.liuwj.ktorm.entity.findAll
 import me.liuwj.ktorm.entity.findOne
 import java.time.Instant
 
 class WalkController : Controller() {
     fun index(call: HttpCall) {
+        val latestWalk = Walks.select(Walks.createdAt).orderBy(Walks.createdAt.desc()).first()[Walks.createdAt].orAbort()
+
         val foundWalk = Walks.findOne {
-            it.name eq "My Awesome Walk"
+            it.createdAt eq latestWalk
         }
         call.render("walks", "walk" to foundWalk)
     }
