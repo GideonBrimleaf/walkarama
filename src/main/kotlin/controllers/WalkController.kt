@@ -58,6 +58,10 @@ class WalkController : Controller() {
     }
 
     fun new(call:HttpCall) {
+        if (Walks.count() > 0) {
+            call.redirect().toRouteNamed("walks.list")
+        }
+
         call.render("walk_new")
     }
 

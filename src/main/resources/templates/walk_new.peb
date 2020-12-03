@@ -1,5 +1,8 @@
 {% extends "layout/base.peb" %}
 
     {% block content %}
-        <google-map></google-map>
+        <main>
+            <h1>Create a New Walk</h1>
+            <google-map></google-map>
+        </main>
     {% endblock %}
