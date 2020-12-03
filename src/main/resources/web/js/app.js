@@ -1925,7 +1925,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      markers: [],
+      markers: this.existingWalk ? ["There will be some stuff here"] : [],
       map: null,
       form: new _form__WEBPACK_IMPORTED_MODULE_0__["default"]({
         name: '',

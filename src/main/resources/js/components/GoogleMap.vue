@@ -11,7 +11,7 @@
         },
         data() {
             return {
-              markers: [],
+              markers: this.existingWalk ? ["There will be some stuff here"] : [],
               map: null,
               form: new Form({name: '', distanceInMetres: 0})
             }
