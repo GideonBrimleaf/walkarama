@@ -13,12 +13,16 @@ internal object WalkFactory : EntityFactory<Walk, Walks>() {
     override fun entity(): Walk {
         // https://alpas.dev/docs/ozone
 
-        val randomDistance = faker.number().randomDouble(2, 1, 2000)
+        val randomDistance = 2929.02
 
         return Walk {
-            name = faker.name().name()
+            name = "My Awesome Walk"
             totalDistance = randomDistance
             distanceLeftToTravel = randomDistance
+            startPointLat = 51.50741538310507
+            startPointLong = -0.06362994689941726
+            endPointLat = 51.523065389149096
+            endPointLong = -0.097618899536136
             updatedAt = Instant.now()
             createdAt = faker.date().past(1, TimeUnit.HOURS).toInstant()
         }

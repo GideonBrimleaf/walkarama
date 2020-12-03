@@ -7,7 +7,7 @@ import dev.alpas.ozone.from
 
 internal class WalkSeeder : Seeder() {
     override fun run(app: Application) {
-        val walks = from(WalkFactory, 6)
+        val walks = from(WalkFactory, 1)
         // Run your seeder(s) here
         // val users = from(UserFactory, "name" to "Jane Doe")
         
