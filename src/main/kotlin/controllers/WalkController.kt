@@ -28,7 +28,7 @@ class WalkController : Controller() {
 
     fun delete(call: HttpCall) {
         Walks.delete { it.id eq call.longParam("id").orAbort() }
-        call.redirect().back()
+        call.redirect().toRouteNamed("walks.new")
     }
 
     fun edit(call: HttpCall) {
