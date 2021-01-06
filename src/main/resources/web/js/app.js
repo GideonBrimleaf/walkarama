@@ -1924,6 +1924,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -1944,8 +1957,10 @@ __webpack_require__.r(__webpack_exports__);
         startPointLat: null,
         startPointLng: null,
         endPointLat: null,
-        endPointLng: null
-      })
+        endPointLng: null,
+        distanceLeftToTravel: 0
+      }),
+      stepsAdded: 0
     };
   },
   computed: {
@@ -1994,6 +2009,13 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.existingWalk) {
         this.initMarkers();
+        this.form.name = this.existingWalk.name;
+        this.form.distanceInMetres = this.existingWalk.distanceInMetres;
+        this.form.startPointLat = this.existingWalk.startPointLat;
+        this.form.startPointLng = this.existingWalk.startPointLong;
+        this.form.endPointLat = this.existingWalk.endPointLat;
+        this.form.endPointLng = this.existingWalk.endPointLong;
+        this.form.distanceLeftToTravel = this.existingWalk.distanceLeftToTravel;
       }
     },
     initMarkers: function initMarkers() {
@@ -2037,6 +2059,10 @@ __webpack_require__.r(__webpack_exports__);
       this.form.endPointLat = this.markers[1].position.lat();
       this.form.endPointLng = this.markers[1].position.lng();
       this.form.post("/walks");
+    },
+    updateWalk: function updateWalk() {
+      this.form.distanceLeftToTravel -= this.stepsAdded;
+      this.form.patch("/walks/".concat(this.existingWalk.id));
     }
   }
 });
@@ -3220,7 +3246,76 @@ var render = function() {
             ]
           )
         ])
-      : _vm._e()
+      : _c("section", [
+          _c("h1", [
+            _vm._v(
+              _vm._s(_vm.existingWalk.name) +
+                " - " +
+                _vm._s(_vm.existingWalk.totalDistance)
+            )
+          ]),
+          _vm._v(" "),
+          _vm.existingWalk.distanceLeftToTravel != 0
+            ? _c("p", [
+                _vm._v(
+                  "Distance left: " +
+                    _vm._s(_vm.existingWalk.distanceLeftToTravel)
+                )
+              ])
+            : _c("p", [_vm._v("Distance left: Completed!")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.updateWalk($event)
+                }
+              }
+            },
+            [
+              _c("label", { attrs: { for: "add-steps" } }, [
+                _vm._v("Add some steps:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.number",
+                    value: _vm.stepsAdded,
+                    expression: "stepsAdded",
+                    modifiers: { number: true }
+                  }
+                ],
+                attrs: { id: "add-steps", type: "number" },
+                domProps: { value: _vm.stepsAdded },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.stepsAdded = _vm._n($event.target.value)
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "submit", value: "Update Walk Distance" }
+              }),
+              _vm._v(" "),
+              _vm.distanceInMetres != _vm.existingWalk.totalDistance
+                ? _c("p", [
+                    _vm._v("Walk changed to " + _vm._s(_vm.distanceInMetres))
+                  ])
+                : _vm._e()
+            ]
+          )
+        ])
   ])
 }
 var staticRenderFns = []
@@ -15539,7 +15634,6 @@ var Form = /*#__PURE__*/function () {
 
       var requestType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'post';
       this.isWorking = true;
-      console.log("The data being sent through is", this.data());
       return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this)).then(function () {
         return _this2.isWorking = false;
       }).then(function () {

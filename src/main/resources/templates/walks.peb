@@ -4,13 +4,13 @@
     <main>
         <h1>Here's your Walks!</h1>
         <google-map walk :existing-walk="{{ walk | json_encode }}"></google-map>
-        <h1>{{ walk.name }} - {{ walk.totalDistance }}</h1>
-        {% if walk.distanceLeftToTravel != 0 %}
-        <p>Distance left: {{ walk.distanceLeftToTravel }}</p>
-        {% else %}
-        <p>Distance left: Completed!</p>
-        {% endif %}
-        <a href="{{ route('walks.edit', {"id": walk.id}) }}">Add Some Steps!</a>
+{#        <h1>{{ walk.name }} - {{ walk.totalDistance }}</h1>#}
+{#        {% if walk.distanceLeftToTravel != 0 %}#}
+{#        <p>Distance left: {{ walk.distanceLeftToTravel }}</p>#}
+{#        {% else %}#}
+{#        <p>Distance left: Completed!</p>#}
+{#        {% endif %}#}
+{#        <a href="{{ route('walks.edit', {"id": walk.id}) }}">Add Some Steps!</a>#}
         <form action="{{ route('walks.delete', {"id": walk.id}) }}" method="POST">
         {% csrf %}
             <input type="hidden" name="_method" value="delete"/>

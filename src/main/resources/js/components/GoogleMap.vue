@@ -10,6 +10,19 @@
           <input type="submit" value="Create Walk">
         </form>
       </section>
+
+      <section v-else>
+        <h1>{{ existingWalk.name }} - {{ existingWalk.totalDistance }}</h1>
+        <p v-if="existingWalk.distanceLeftToTravel != 0">Distance left: {{ existingWalk.distanceLeftToTravel }}</p>
+        <p v-else>Distance left: Completed!</p>
+
+        <form v-on:submit.prevent="updateWalk">
+          <label for="add-steps">Add some steps:</label>
+          <input id="add-steps" type="number" v-model.number="stepsAdded">
+          <input type="submit" value="Update Walk Distance">
+          <p v-if="distanceInMetres != existingWalk.totalDistance">Walk changed to {{ distanceInMetres }}</p>
+        </form>
+      </section>
     </div>
 </template>
 
@@ -25,10 +38,15 @@
               markers: [],
               map: null,
               form: new Form({
-                name: '', distanceInMetres: 0,
-                startPointLat: null, startPointLng: null,
-                endPointLat: null, endPointLng: null
-              })
+                name: '',
+                distanceInMetres: 0,
+                startPointLat: null, 
+                startPointLng: null,
+                endPointLat: null, 
+                endPointLng: null,
+                distanceLeftToTravel: 0
+              }),
+              stepsAdded: 0
             }
         },
         computed: {
@@ -77,6 +95,14 @@
 
               if (this.existingWalk) {
                 this.initMarkers()
+
+                this.form.name = this.existingWalk.name
+                this.form.distanceInMetres = this.existingWalk.distanceInMetres
+                this.form.startPointLat = this.existingWalk.startPointLat
+                this.form.startPointLng = this.existingWalk.startPointLong
+                this.form.endPointLat = this.existingWalk.endPointLat
+                this.form.endPointLng = this.existingWalk.endPointLong
+                this.form.distanceLeftToTravel = this.existingWalk.distanceLeftToTravel
               }
             },
             initMarkers: function() {
@@ -112,6 +138,10 @@
               this.form.endPointLat = this.markers[1].position.lat()
               this.form.endPointLng = this.markers[1].position.lng()
               this.form.post(`/walks`)
+            },
+            updateWalk: function() {
+              this.form.distanceLeftToTravel -= this.stepsAdded
+              this.form.patch(`/walks/${this.existingWalk.id}`)
             }
         }
     }
