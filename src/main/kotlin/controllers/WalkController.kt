@@ -42,21 +42,19 @@ class WalkController : Controller() {
     fun update(call: HttpCall) {
         val id = call.longParam("id").orAbort()
         val foundWalk = Walks.findOrFail(id)
-        val distancedTravelled = call.stringParam("walk-travelled").orAbort().toDouble()
 
-        foundWalk.name = call.stringParam("walk-name")
-        foundWalk.totalDistance = call.stringParam("walk-distance").orAbort().toDouble()
-        if (distancedTravelled <= foundWalk.distanceLeftToTravel) {
-            foundWalk.distanceLeftToTravel -= distancedTravelled
-        } else {
-            foundWalk.distanceLeftToTravel = 0.0
-        }
-
+        foundWalk.name = call.jsonBody?.get("name").toString().orAbort()
+        foundWalk.totalDistance = call.jsonBody?.get("distanceInMetres").orAbort() as Double
+        foundWalk.distanceLeftToTravel = call.jsonBody?.get("distanceLeftToTravel").orAbort() as Double
+        foundWalk.startPointLat = call.jsonBody?.get("startPointLat").orAbort() as Double
+        foundWalk.startPointLong = call.jsonBody?.get("startPointLng").orAbort() as Double
+        foundWalk.endPointLat = call.jsonBody?.get("endPointLat").orAbort() as Double
+        foundWalk.endPointLong = call.jsonBody?.get("endPointLng").orAbort() as Double
         foundWalk.updatedAt = Instant.now()
 
         foundWalk.flushChanges()
 
-        call.redirect().toRouteNamed("walks.list")
+        call.acknowledge()
     }
 
     fun new(call:HttpCall) {

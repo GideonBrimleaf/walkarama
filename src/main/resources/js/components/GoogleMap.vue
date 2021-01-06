@@ -11,9 +11,9 @@
         </form>
       </section>
 
-      <section v-else>
-        <h1>{{ existingWalk.name }} - {{ existingWalk.totalDistance }}</h1>
-        <p v-if="existingWalk.distanceLeftToTravel != 0">Distance left: {{ existingWalk.distanceLeftToTravel }}</p>
+      <section v-if="existingWalk">
+        <h1>{{ form.name }} - {{ form.distanceInMetres }}</h1>
+        <p v-if="form.distanceLeftToTravel != 0">Distance left: {{ form.distanceLeftToTravel }}</p>
         <p v-else>Distance left: Completed!</p>
 
         <form v-on:submit.prevent="updateWalk">
@@ -140,6 +140,7 @@
               this.form.post(`/walks`)
             },
             updateWalk: function() {
+              this.existingWalk.distanceLeftToTravel -= this.stepsAdded
               this.form.distanceLeftToTravel -= this.stepsAdded
               this.form.patch(`/walks/${this.existingWalk.id}`)
             }

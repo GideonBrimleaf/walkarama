@@ -15,7 +15,8 @@ class Form {
   }
 
   post(endpoint) {
-      return this.submit(endpoint)
+      this.submit(endpoint)
+      .then(() => window.location.href = window.location.origin + endpoint)
   }
 
   patch(endpoint) {
@@ -32,7 +33,6 @@ class Form {
           .catch(this.onFail.bind(this))
           .then(this.onSuccess.bind(this))
           .then(() => this.isWorking = false)
-          .then(() => window.location.href = window.location.origin + endpoint)
   }
 
   onSuccess(response) {

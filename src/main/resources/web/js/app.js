@@ -2061,6 +2061,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.post("/walks");
     },
     updateWalk: function updateWalk() {
+      this.existingWalk.distanceLeftToTravel -= this.stepsAdded;
       this.form.distanceLeftToTravel -= this.stepsAdded;
       this.form.patch("/walks/".concat(this.existingWalk.id));
     }
@@ -3246,20 +3247,20 @@ var render = function() {
             ]
           )
         ])
-      : _c("section", [
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.existingWalk
+      ? _c("section", [
           _c("h1", [
             _vm._v(
-              _vm._s(_vm.existingWalk.name) +
-                " - " +
-                _vm._s(_vm.existingWalk.totalDistance)
+              _vm._s(_vm.form.name) + " - " + _vm._s(_vm.form.distanceInMetres)
             )
           ]),
           _vm._v(" "),
-          _vm.existingWalk.distanceLeftToTravel != 0
+          _vm.form.distanceLeftToTravel != 0
             ? _c("p", [
                 _vm._v(
-                  "Distance left: " +
-                    _vm._s(_vm.existingWalk.distanceLeftToTravel)
+                  "Distance left: " + _vm._s(_vm.form.distanceLeftToTravel)
                 )
               ])
             : _c("p", [_vm._v("Distance left: Completed!")]),
@@ -3316,6 +3317,7 @@ var render = function() {
             ]
           )
         ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -15615,7 +15617,9 @@ var Form = /*#__PURE__*/function () {
   }, {
     key: "post",
     value: function post(endpoint) {
-      return this.submit(endpoint);
+      this.submit(endpoint).then(function () {
+        return window.location.href = window.location.origin + endpoint;
+      });
     }
   }, {
     key: "patch",
@@ -15636,8 +15640,6 @@ var Form = /*#__PURE__*/function () {
       this.isWorking = true;
       return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this)).then(function () {
         return _this2.isWorking = false;
-      }).then(function () {
-        return window.location.href = window.location.origin + endpoint;
       });
     }
   }, {
