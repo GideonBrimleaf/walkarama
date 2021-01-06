@@ -1913,6 +1913,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -3153,7 +3164,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { ref: "mapContainer", attrs: { id: "map" } })
+  return _c("div", [
+    _c("div", { ref: "mapContainer", attrs: { id: "map" } }),
+    _vm._v(" "),
+    !_vm.existingWalk && _vm.markers.length === 2
+      ? _c("section", [
+          _c("p", [
+            _vm._v("Distance selected: " + _vm._s(_vm.distanceInMetres) + "m")
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.createWalk($event)
+                }
+              }
+            },
+            [
+              _c("label", { attrs: { for: "new-item" } }, [
+                _vm._v("Give your walk a name:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.name,
+                    expression: "form.name"
+                  }
+                ],
+                attrs: { id: "new-walk", type: "text", required: "" },
+                domProps: { value: _vm.form.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "name", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "submit", value: "Create Walk" } })
+            ]
+          )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

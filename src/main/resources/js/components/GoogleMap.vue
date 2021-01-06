@@ -1,5 +1,16 @@
 <template>
-    <div id="map" ref="mapContainer"></div>
+    <div>
+      <div id="map" ref="mapContainer"></div>
+      <section v-if="!existingWalk && markers.length === 2">
+        <p>Distance selected: {{ distanceInMetres }}m</p>
+
+        <form v-on:submit.prevent="createWalk">
+          <label for="new-item">Give your walk a name:</label>
+          <input id="new-walk" type="text" v-model="form.name" required>
+          <input type="submit" value="Create Walk">
+        </form>
+      </section>
+    </div>
 </template>
 
 <script>
