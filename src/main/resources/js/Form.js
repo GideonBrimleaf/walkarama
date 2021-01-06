@@ -28,6 +28,7 @@ class Form {
 
   submit(endpoint, requestType = 'post') {
       this.isWorking = true
+      console.log(`The data being sent through is`, this.data())
       return axios[requestType](endpoint, this.data())
           .catch(this.onFail.bind(this))
           .then(this.onSuccess.bind(this))

@@ -1,6 +1,8 @@
 package com.radiantchamber.walkarama.controllers
 
 import com.radiantchamber.walkarama.entities.Walks
+import com.radiantchamber.walkarama.entities.Walks.endPointLat
+import com.radiantchamber.walkarama.entities.Walks.startPointLong
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
@@ -70,6 +72,10 @@ class WalkController : Controller() {
             it.name to call.jsonBody?.get("name")
             it.totalDistance to call.jsonBody?.get("distanceInMetres")
             it.distanceLeftToTravel to call.jsonBody?.get("distanceInMetres")
+            it.startPointLat to call.jsonBody?.get("startPointLat")
+            it.startPointLong to call.jsonBody?.get("startPointLng")
+            it.endPointLat to call.jsonBody?.get("endPointLat")
+            it.endPointLong to call.jsonBody?.get("endPointLng")
         }
 
         call.acknowledge(201)

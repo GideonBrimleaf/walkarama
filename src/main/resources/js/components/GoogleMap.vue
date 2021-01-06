@@ -24,7 +24,11 @@
             return {
               markers: [],
               map: null,
-              form: new Form({name: '', distanceInMetres: 0})
+              form: new Form({
+                name: '', distanceInMetres: 0,
+                startPointLat: null, startPointLng: null,
+                endPointLat: null, endPointLng: null
+              })
             }
         },
         computed: {
@@ -67,7 +71,6 @@
               });
 
               this.map.addListener('click', (event) => {
-                console.log('click event lat long is', event.latLng.toJSON())
                 const position = event.latLng.toJSON() 
                 this.addMarker(position)
               })
@@ -104,6 +107,10 @@
               }
             },
             createWalk: function() {
+              this.form.startPointLat = this.markers[0].position.lat()
+              this.form.startPointLng = this.markers[0].position.lng()
+              this.form.endPointLat = this.markers[1].position.lat()
+              this.form.endPointLng = this.markers[1].position.lng()
               this.form.post(`/walks`)
             }
         }

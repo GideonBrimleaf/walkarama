@@ -1940,7 +1940,11 @@ __webpack_require__.r(__webpack_exports__);
       map: null,
       form: new _form__WEBPACK_IMPORTED_MODULE_0__["default"]({
         name: '',
-        distanceInMetres: 0
+        distanceInMetres: 0,
+        startPointLat: null,
+        startPointLng: null,
+        endPointLat: null,
+        endPointLng: null
       })
     };
   },
@@ -1983,7 +1987,6 @@ __webpack_require__.r(__webpack_exports__);
         zoom: 14
       });
       this.map.addListener('click', function (event) {
-        console.log('click event lat long is', event.latLng.toJSON());
         var position = event.latLng.toJSON();
 
         _this2.addMarker(position);
@@ -2029,6 +2032,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     createWalk: function createWalk() {
+      this.form.startPointLat = this.markers[0].position.lat();
+      this.form.startPointLng = this.markers[0].position.lng();
+      this.form.endPointLat = this.markers[1].position.lat();
+      this.form.endPointLng = this.markers[1].position.lng();
       this.form.post("/walks");
     }
   }
@@ -15532,6 +15539,7 @@ var Form = /*#__PURE__*/function () {
 
       var requestType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'post';
       this.isWorking = true;
+      console.log("The data being sent through is", this.data());
       return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this)).then(function () {
         return _this2.isWorking = false;
       }).then(function () {
