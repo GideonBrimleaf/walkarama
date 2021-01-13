@@ -3,6 +3,7 @@ package com.radiantchamber.walkarama
 import com.radiantchamber.walkarama.controllers.StuffController
 import com.radiantchamber.walkarama.controllers.WalkController
 import com.radiantchamber.walkarama.controllers.WelcomeController
+import dev.alpas.auth.authRoutes
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router
 
@@ -10,6 +11,7 @@ import dev.alpas.routing.Router
 fun Router.addRoutes() = apply {
     group {
         webRoutesGroup()
+        authRoutes()
     }.middlewareGroup("web")
 
     apiRoutes()

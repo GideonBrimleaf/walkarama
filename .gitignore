@@ -45,3 +45,5 @@ node_modules
 storage/sessions
 storage/src
 !gradle/wrapper
+
+storage/mails
