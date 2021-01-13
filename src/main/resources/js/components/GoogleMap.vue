@@ -90,7 +90,7 @@
 
               this.map.addListener('click', (event) => {
                 const position = event.latLng.toJSON() 
-                this.addMarker(position)
+                this.addMarker(position, true)
               })
 
               if (this.existingWalk) {
@@ -107,18 +107,18 @@
             },
             initMarkers: function() {
               const startPoint = {lat: this.existingWalk.startPointLat, lng: this.existingWalk.startPointLong}
-              this.addMarker(startPoint)
+              this.addMarker(startPoint, false)
               const endPoint = {lat: this.existingWalk.endPointLat, lng: this.existingWalk.endPointLong}
-              this.addMarker(endPoint)
+              this.addMarker(endPoint, false)
             },
-            addMarker: function(position) {
+            addMarker: function(position, canDrag) {
               if (this.markers.length < 2) {
                 const marker = new google.maps.Marker({
                   position: {
                     lat: position.lat,
                     lng: position.lng
                   },
-                  draggable: true,
+                  draggable: canDrag,
                   map: this.map,
                   title: `I'm Mary Poppins Y'All!`,
                   id: position.lat + '' + position.lng

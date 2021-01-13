@@ -2004,7 +2004,7 @@ __webpack_require__.r(__webpack_exports__);
       this.map.addListener('click', function (event) {
         var position = event.latLng.toJSON();
 
-        _this2.addMarker(position);
+        _this2.addMarker(position, true);
       });
 
       if (this.existingWalk) {
@@ -2023,14 +2023,14 @@ __webpack_require__.r(__webpack_exports__);
         lat: this.existingWalk.startPointLat,
         lng: this.existingWalk.startPointLong
       };
-      this.addMarker(startPoint);
+      this.addMarker(startPoint, false);
       var endPoint = {
         lat: this.existingWalk.endPointLat,
         lng: this.existingWalk.endPointLong
       };
-      this.addMarker(endPoint);
+      this.addMarker(endPoint, false);
     },
-    addMarker: function addMarker(position) {
+    addMarker: function addMarker(position, canDrag) {
       var _this3 = this;
 
       if (this.markers.length < 2) {
@@ -2039,7 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
             lat: position.lat,
             lng: position.lng
           },
-          draggable: true,
+          draggable: canDrag,
           map: this.map,
           title: "I'm Mary Poppins Y'All!",
           id: position.lat + '' + position.lng
