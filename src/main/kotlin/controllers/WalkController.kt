@@ -3,18 +3,22 @@ package com.radiantchamber.walkarama.controllers
 import com.radiantchamber.walkarama.entities.Walks
 import com.radiantchamber.walkarama.entities.Walks.endPointLat
 import com.radiantchamber.walkarama.entities.Walks.startPointLong
+import dev.alpas.auth.middleware.VerifiedEmailOnlyMiddleware
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
 import dev.alpas.ozone.findOneOrFail
 import dev.alpas.ozone.findOrFail
 import dev.alpas.routing.Controller
+import dev.alpas.routing.ControllerMiddleware
 import me.liuwj.ktorm.dsl.*
 import me.liuwj.ktorm.entity.findAll
 import me.liuwj.ktorm.entity.findOne
 import java.time.Instant
 
 class WalkController : Controller() {
+    override fun middleware(call: HttpCall) = listOf(ControllerMiddleware(VerifiedEmailOnlyMiddleware::class))
+
     fun index(call: HttpCall) {
         val latestWalk = Walks.select(Walks.createdAt).orderBy(Walks.createdAt.desc()).firstOrNull()
 
@@ -68,6 +72,7 @@ class WalkController : Controller() {
     fun create(call:HttpCall) {
         Walks.create {
             it.name to call.jsonBody?.get("name")
+            it.ownerId to call.user.id
             it.totalDistance to call.jsonBody?.get("distanceInMetres")
             it.distanceLeftToTravel to call.jsonBody?.get("distanceInMetres")
             it.startPointLat to call.jsonBody?.get("startPointLat")
