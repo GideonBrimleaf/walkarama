@@ -26,7 +26,7 @@ private fun RouteGroup.webRoutesGroup() {
     delete("/stuff/<id>", StuffController::delete).name("delete")
     group("/walks") {
         addWalksRoutes()
-    }.name("walks")
+    }.name("walks").mustBeAuthenticated()
 }
 
 private fun RouteGroup.addWalksRoutes() {
