@@ -1,5 +1,6 @@
 package com.radiantchamber.walkarama.controllers
 
+import com.radiantchamber.walkarama.entities.User
 import com.radiantchamber.walkarama.entities.Walks
 import com.radiantchamber.walkarama.entities.Walks.endPointLat
 import com.radiantchamber.walkarama.entities.Walks.startPointLong
@@ -20,13 +21,12 @@ class WalkController : Controller() {
     override fun middleware(call: HttpCall) = listOf(ControllerMiddleware(VerifiedEmailOnlyMiddleware::class))
 
     fun index(call: HttpCall) {
-        val latestWalk = Walks.select(Walks.createdAt).orderBy(Walks.createdAt.desc()).firstOrNull()
+        val user = call.caller<User>()
+
+        val latestWalk = user.walks.sortedByDescending { it.createdAt }.firstOrNull()
 
         if (latestWalk != null) {
-            val foundWalk = Walks.findOne {
-                it.createdAt eq latestWalk[Walks.createdAt]!!
-            }
-            call.render("walks", "walk" to foundWalk)
+            call.render("walks", "walk" to latestWalk)
         } else {
             call.redirect().toRouteNamed("walks.new")
         }
