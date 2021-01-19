@@ -16,7 +16,7 @@ internal class WalkFactory : EntityFactory<Walk, Walks>() {
         val randomDistance = 2929.02
 
         return Walk {
-            name = "My Testeroony Walk"
+            name = faker.funnyName().toString()
             totalDistance = randomDistance
             distanceLeftToTravel = randomDistance
             startPointLat = 51.50741538310507
