@@ -81,6 +81,7 @@ class WalkController : Controller() {
             it.startPointLong to call.jsonBody?.get("startPointLng")
             it.endPointLat to call.jsonBody?.get("endPointLat")
             it.endPointLong to call.jsonBody?.get("endPointLng")
+            it.isActive to true
         }
 
         call.acknowledge(201)

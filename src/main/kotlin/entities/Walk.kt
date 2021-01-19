@@ -3,10 +3,7 @@ package com.radiantchamber.walkarama.entities
 import com.radiantchamber.walkarama.entities.Stuffs.bindTo
 import com.radiantchamber.walkarama.entities.Stuffs.useCurrent
 import dev.alpas.ozone.*
-import me.liuwj.ktorm.schema.double
-import me.liuwj.ktorm.schema.float
-import me.liuwj.ktorm.schema.long
-import me.liuwj.ktorm.schema.timestamp
+import me.liuwj.ktorm.schema.*
 import java.time.Instant
 
 interface Walk : OzoneEntity<Walk> {
@@ -19,6 +16,7 @@ interface Walk : OzoneEntity<Walk> {
     var startPointLong: Double
     var endPointLat: Double
     var endPointLong: Double
+    var isActive: Boolean
     var createdAt: Instant?
     var updatedAt: Instant?
 
@@ -35,6 +33,7 @@ object Walks : OzoneTable<Walk>("walks") {
     val startPointLong by double("start_point_long").nullable().bindTo { it.startPointLong }
     val endPointLat by double("end_point_lat").nullable().bindTo { it.endPointLat }
     val endPointLong by double("end_point_long").nullable().bindTo { it.endPointLong }
+    val isActive by boolean("is_active").bindTo { it.isActive }
     val createdAt by timestamp("created_at").useCurrent().bindTo { it.createdAt }
     val updatedAt by timestamp("updated_at").useCurrent().bindTo { it.updatedAt }
 }
