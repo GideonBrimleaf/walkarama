@@ -13,11 +13,10 @@ import me.liuwj.ktorm.entity.findById
 // https://alpas.dev/docs/seeding
 internal class DatabaseSeeder : Seeder() {
     override fun run(app: Application) {
-        val userMe = Users.findById(1).orAbort()
-        val userRandom = from(UserFactory(app.make()))
+        val randomUsers = from(UserFactory(app.make()),2)
 
-        from(WalkFactory(), 2, mapOf("owner_id" to userRandom.id))
-        from(WalkFactory(), 3, mapOf("owner_id" to userMe.id))
+        from(WalkFactory(), 2, mapOf("owner_id" to randomUsers.first().id))
+        from(WalkFactory(), 3, mapOf("owner_id" to randomUsers.last().id))
 
     }
 }

@@ -16,13 +16,14 @@ internal class WalkFactory : EntityFactory<Walk, Walks>() {
         val randomDistance = 2929.02
 
         return Walk {
-            name = faker.funnyName().toString()
+            name = faker.funnyName().name()
             totalDistance = randomDistance
             distanceLeftToTravel = randomDistance
             startPointLat = 51.50741538310507
             startPointLong = -0.06362994689941726
             endPointLat = 51.523065389149096
             endPointLong = -0.097618899536136
+            isActive = false
             updatedAt = Instant.now()
             createdAt = faker.date().past(1, TimeUnit.HOURS).toInstant()
         }
