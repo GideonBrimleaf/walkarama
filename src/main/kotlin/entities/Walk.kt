@@ -1,9 +1,13 @@
 package com.radiantchamber.walkarama.entities
 
-import com.radiantchamber.walkarama.entities.Stuffs.bindTo
-import com.radiantchamber.walkarama.entities.Stuffs.useCurrent
-import dev.alpas.ozone.*
-import me.liuwj.ktorm.schema.*
+import dev.alpas.ozone.OzoneEntity
+import dev.alpas.ozone.OzoneTable
+import dev.alpas.ozone.bigIncrements
+import dev.alpas.ozone.string
+import me.liuwj.ktorm.schema.boolean
+import me.liuwj.ktorm.schema.double
+import me.liuwj.ktorm.schema.long
+import me.liuwj.ktorm.schema.timestamp
 import java.time.Instant
 
 interface Walk : OzoneEntity<Walk> {

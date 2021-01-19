@@ -23,10 +23,10 @@ class WalkController : Controller() {
     fun index(call: HttpCall) {
         val user = call.caller<User>()
 
-        val latestWalk = user.walks.sortedByDescending { it.createdAt }.firstOrNull()
+        val activeWalk = user.walks.firstOrNull { it.isActive }
 
-        if (latestWalk != null) {
-            call.render("walks", "walk" to latestWalk)
+        if (activeWalk != null) {
+            call.render("walks", "walk" to activeWalk)
         } else {
             call.redirect().toRouteNamed("walks.new")
         }
@@ -64,7 +64,9 @@ class WalkController : Controller() {
     fun new(call:HttpCall) {
         val user = call.caller<User>()
 
-        if (user.walks.isNotEmpty()) {
+        val activeWalk = user.walks.firstOrNull { it.isActive }
+
+        if (activeWalk != null) {
             call.redirect().toRouteNamed("walks.list")
         } else {
             call.render("walk_new")
