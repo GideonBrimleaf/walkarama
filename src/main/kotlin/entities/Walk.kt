@@ -12,7 +12,7 @@ import java.time.Instant
 interface Walk : OzoneEntity<Walk> {
     var id: Long
     var name: String?
-    val owner: User
+    var owner: User
     var totalDistance: Double
     var distanceLeftToTravel: Double
     var startPointLat: Double

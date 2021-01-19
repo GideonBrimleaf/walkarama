@@ -1,13 +1,13 @@
 package com.radiantchamber.walkarama.database.factories
 
-import dev.alpas.ozone.EntityFactory
-import dev.alpas.ozone.faker
 import com.radiantchamber.walkarama.entities.Walk
 import com.radiantchamber.walkarama.entities.Walks
+import dev.alpas.ozone.EntityFactory
+import dev.alpas.ozone.faker
 import java.time.Instant
 import java.util.concurrent.TimeUnit
 
-internal object WalkFactory : EntityFactory<Walk, Walks>() {
+internal class WalkFactory : EntityFactory<Walk, Walks>() {
     override val table = Walks
     
     override fun entity(): Walk {
@@ -16,7 +16,7 @@ internal object WalkFactory : EntityFactory<Walk, Walks>() {
         val randomDistance = 2929.02
 
         return Walk {
-            name = "My Awesome Walk"
+            name = "My Testeroony Walk"
             totalDistance = randomDistance
             distanceLeftToTravel = randomDistance
             startPointLat = 51.50741538310507

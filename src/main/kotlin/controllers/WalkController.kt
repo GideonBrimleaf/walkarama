@@ -62,11 +62,13 @@ class WalkController : Controller() {
     }
 
     fun new(call:HttpCall) {
-        if (Walks.count() > 0) {
-            call.redirect().toRouteNamed("walks.list")
-        }
+        val user = call.caller<User>()
 
-        call.render("walk_new")
+        if (user.walks.isNotEmpty()) {
+            call.redirect().toRouteNamed("walks.list")
+        } else {
+            call.render("walk_new")
+        }
     }
 
     fun create(call:HttpCall) {
