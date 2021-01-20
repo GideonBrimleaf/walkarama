@@ -15618,7 +15618,7 @@ var Form = /*#__PURE__*/function () {
     key: "post",
     value: function post(endpoint) {
       this.submit(endpoint).then(function () {
-        return window.location.href = window.location.origin + endpoint;
+        return window.location.href = window.location.origin + endpoint + '/current';
       });
     }
   }, {

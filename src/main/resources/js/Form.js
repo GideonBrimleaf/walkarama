@@ -16,7 +16,7 @@ class Form {
 
   post(endpoint) {
       this.submit(endpoint)
-      .then(() => window.location.href = window.location.origin + endpoint)
+      .then(() => window.location.href = window.location.origin + endpoint + '/current')
   }
 
   patch(endpoint) {
