@@ -31,6 +31,7 @@ private fun RouteGroup.webRoutesGroup() {
 
 private fun RouteGroup.addWalksRoutes() {
     get("/", WalkController::index).name("list")
+    get("/current", WalkController::showActive).name("show_active")
     get("/new", WalkController::new).name("new")
     post("/", WalkController::create).name("create")
     get("/<id>/edit", WalkController::edit).name("edit")

@@ -1,0 +1,15 @@
+{% extends "layout/base.peb" %}
+
+{% block content %}
+    <main>
+        <h1>Here's your Walks!</h1>
+        <google-map walk :existing-walk="{{ walk | json_encode }}"></google-map>
+        <form action="{{ route('walks.delete', {"id": walk.id}) }}" method="POST">
+        {% csrf %}
+            <input type="hidden" name="_method" value="delete"/>
+            <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
+                Delete
+            </button>
+        </form>
+    </main>
+{% endblock %}
