@@ -7,6 +7,7 @@ fun main(args: Array<String>) {
 //    TODO User can close and restart a walk - closing redirects you to create a walk.  Reactivating an existing walk should prompt you to deactivate any current walk
 //    TODO Completing a walk redirects you to the archive
 //    TODO Add navigation
+//    TODO Make this actually look decent
 //    TODO Add invites
 //    TODO Show user progression along walk
 //    TODO User can see latest activity from walk (like projects)
