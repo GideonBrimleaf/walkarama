@@ -4,8 +4,12 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO User can see inactive walks
+//    TODO User can close and restart a walk - closing redirects you to create a walk.  Reactivating an existing walk should prompt you to deactivate any current walk
+//    TODO Completing a walk redirects you to the archive
+//    TODO Add navigation
 //    TODO Add invites
+//    TODO Show user progression along walk
+//    TODO User can see latest activity from walk (like projects)
     val file = File(".env")
     if (!file.exists()) {
         file.createNewFile()
