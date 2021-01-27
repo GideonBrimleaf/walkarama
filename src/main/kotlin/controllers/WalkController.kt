@@ -70,7 +70,6 @@ class WalkController : Controller() {
 
     fun new(call:HttpCall) {
         val user = call.caller<User>()
-
         val activeWalk = user.walks.firstOrNull { it.isActive }
 
         if (activeWalk != null) {
@@ -94,5 +93,15 @@ class WalkController : Controller() {
         }
 
         call.acknowledge(201)
+    }
+
+    fun reactivate(call:HttpCall) {
+        val id = call.longParam("id").orAbort()
+        val foundWalk = Walks.findOrFail(id)
+
+        foundWalk.isActive = true
+        foundWalk.flushChanges()
+
+        call.redirect().toRouteNamed("walks.show_active")
     }
 }
