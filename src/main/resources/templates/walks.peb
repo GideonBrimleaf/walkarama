@@ -27,7 +27,10 @@
                 <form action="{{ route('walks.reactivate', {"id": walk.id}) }}" method="POST">
             {% csrf %}
                 <input type="hidden" name="_method" value="patch"/>
-                <button class="hover:text-green-800 text-green-600 text-sm uppercase hover-target">
+                <button
+                    class="hover:text-green-800 text-green-600 text-sm uppercase hover-target"
+                    onclick="return confirm('Are you sure you want to reinstate {{ walk.name }}?  Any current walks will be deactivated')"
+                >
                     Reactivate
                 </button>
             </form>
