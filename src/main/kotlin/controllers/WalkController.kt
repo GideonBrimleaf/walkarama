@@ -96,9 +96,16 @@ class WalkController : Controller() {
     }
 
     fun reactivate(call:HttpCall) {
+        val user = call.caller<User>()
+        Walks.update {
+            it.isActive to false
+            where {
+                Walks.ownerId eq user.id
+            }
+        }
+
         val id = call.longParam("id").orAbort()
         val foundWalk = Walks.findOrFail(id)
-
         foundWalk.isActive = true
         foundWalk.flushChanges()
 
