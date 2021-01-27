@@ -67,6 +67,16 @@ class WalkController : Controller() {
         call.acknowledge()
     }
 
+    fun deactivate(call: HttpCall) {
+        val id = call.longParam("id").orAbort()
+        val foundWalk = Walks.findOrFail(id)
+
+        foundWalk.isActive = false
+        foundWalk.flushChanges()
+
+        call.redirect().toRouteNamed("walks.new")
+    }
+
     fun new(call:HttpCall) {
         val user = call.caller<User>()
 

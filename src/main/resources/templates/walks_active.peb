@@ -11,5 +11,12 @@
                 Delete
             </button>
         </form>
+        <form action="{{ route('walks.deactivate', {"id": walk.id}) }}" method="POST">
+        {% csrf %}
+            <input type="hidden" name="_method" value="patch"/>
+            <button class="hover:text-blue-800 text-blue-600 text-sm uppercase hover-target">
+                Deactivate
+            </button>
+        </form>
     </main>
 {% endblock %}
