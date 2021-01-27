@@ -1941,6 +1941,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -2067,9 +2073,15 @@ __webpack_require__.r(__webpack_exports__);
       this.form.post("/walks");
     },
     updateWalk: function updateWalk() {
-      this.existingWalk.distanceLeftToTravel -= this.stepsAdded;
-      this.form.distanceLeftToTravel -= this.stepsAdded;
-      this.form.patch("/walks/".concat(this.existingWalk.id));
+      if (this.existingWalk.distanceLeftToTravel > this.stepsAdded) {
+        this.existingWalk.distanceLeftToTravel -= this.stepsAdded;
+        this.form.distanceLeftToTravel -= this.stepsAdded;
+        this.form.patch("/walks/".concat(this.existingWalk.id));
+      } else {
+        this.existingWalk.distanceLeftToTravel = 0;
+        this.form.distanceLeftToTravel = 0;
+        this.deactivateWalk();
+      }
     },
     deactivateWalk: function deactivateWalk() {
       this.existingWalk.isActive = false;
@@ -3261,90 +3273,112 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.existingWalk
-      ? _c("section", [
-          _c("h1", [
-            _vm._v(
-              _vm._s(_vm.form.name) + " - " + _vm._s(_vm.form.distanceInMetres)
-            )
-          ]),
-          _vm._v(" "),
-          _vm.form.distanceLeftToTravel != 0
-            ? _c("p", [
-                _vm._v(
-                  "Distance left: " + _vm._s(_vm.form.distanceLeftToTravel)
-                )
-              ])
-            : _c("p", [_vm._v("Distance left: Completed!")]),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.updateWalk($event)
-                }
-              }
-            },
-            [
-              _c("label", { attrs: { for: "add-steps" } }, [
-                _vm._v("Add some steps:")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.stepsAdded,
-                    expression: "stepsAdded",
-                    modifiers: { number: true }
-                  }
-                ],
-                attrs: { id: "add-steps", type: "number" },
-                domProps: { value: _vm.stepsAdded },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.stepsAdded = _vm._n($event.target.value)
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { type: "submit", value: "Update Walk Distance" }
-              }),
-              _vm._v(" "),
-              _vm.distanceInMetres != _vm.existingWalk.totalDistance
-                ? _c("p", [
-                    _vm._v("Walk changed to " + _vm._s(_vm.distanceInMetres))
+      ? _c(
+          "section",
+          [
+            _c("h1", [
+              _vm._v(
+                _vm._s(_vm.form.name) +
+                  " - " +
+                  _vm._s(_vm.form.distanceInMetres)
+              )
+            ]),
+            _vm._v(" "),
+            _vm.form.distanceLeftToTravel != 0
+              ? _c("p", [
+                  _vm._v(
+                    "Distance left: " + _vm._s(_vm.form.distanceLeftToTravel)
+                  )
+                ])
+              : [
+                  _c("p", [_vm._v("Distance left: Completed!")]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "/walks" } }, [
+                    _vm._v("View Your Completed Walks")
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "/walks/new" } }, [
+                    _vm._v("Create a New Walk")
                   ])
-                : _vm._e()
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.deactivateWalk($event)
-                }
-              }
-            },
-            [
-              _c("input", {
-                attrs: { type: "submit", value: "Deactivate Walk" }
-              })
-            ]
-          )
-        ])
+                ],
+            _vm._v(" "),
+            _vm.form.distanceLeftToTravel > 0
+              ? [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateWalk($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("label", { attrs: { for: "add-steps" } }, [
+                        _vm._v("Add some steps:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: _vm.stepsAdded,
+                            expression: "stepsAdded",
+                            modifiers: { number: true }
+                          }
+                        ],
+                        attrs: { id: "add-steps", type: "number" },
+                        domProps: { value: _vm.stepsAdded },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.stepsAdded = _vm._n($event.target.value)
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "submit", value: "Update Walk Distance" }
+                      }),
+                      _vm._v(" "),
+                      _vm.distanceInMetres != _vm.existingWalk.totalDistance
+                        ? _c("p", [
+                            _vm._v(
+                              "Walk changed to " + _vm._s(_vm.distanceInMetres)
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.deactivateWalk($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("input", {
+                        attrs: { type: "submit", value: "Deactivate Walk" }
+                      })
+                    ]
+                  )
+                ]
+              : _vm._e()
+          ],
+          2
+        )
       : _vm._e()
   ])
 }

@@ -23,7 +23,7 @@
                 <p>Distance Left to Travel - {{ walk.distanceLeftToTravel }}</p>
             {% endif %}
             <p>Currently Active - {{ walk.isActive }}</p>
-            {% if walk.isActive == false %}
+            {% if walk.isActive == false and walk.distanceLeftToTravel != 0 %}
                 <form action="{{ route('walks.reactivate', {"id": walk.id}) }}" method="POST">
             {% csrf %}
                 <input type="hidden" name="_method" value="patch"/>

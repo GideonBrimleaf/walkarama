@@ -55,7 +55,7 @@ class WalkController : Controller() {
 
         foundWalk.name = call.jsonBody?.get("name").toString().orAbort()
         foundWalk.totalDistance = call.jsonBody?.get("distanceInMetres").orAbort() as Double
-        foundWalk.distanceLeftToTravel = call.jsonBody?.get("distanceLeftToTravel").orAbort() as Double
+        foundWalk.distanceLeftToTravel = (call.jsonBody?.get("distanceLeftToTravel").orAbort() as Int).toDouble()
         foundWalk.startPointLat = call.jsonBody?.get("startPointLat").orAbort() as Double
         foundWalk.startPointLong = call.jsonBody?.get("startPointLng").orAbort() as Double
         foundWalk.endPointLat = call.jsonBody?.get("endPointLat").orAbort() as Double

@@ -14,18 +14,24 @@
       <section v-if="existingWalk">
         <h1>{{ form.name }} - {{ form.distanceInMetres }}</h1>
         <p v-if="form.distanceLeftToTravel != 0">Distance left: {{ form.distanceLeftToTravel }}</p>
-        <p v-else>Distance left: Completed!</p>
+        <template v-else>
+          <p>Distance left: Completed!</p>
+          <a href="/walks">View Your Completed Walks</a>
+          <a href="/walks/new">Create a New Walk</a>
+        </template>
 
-        <form v-on:submit.prevent="updateWalk">
-          <label for="add-steps">Add some steps:</label>
-          <input id="add-steps" type="number" v-model.number="stepsAdded">
-          <input type="submit" value="Update Walk Distance">
-          <p v-if="distanceInMetres != existingWalk.totalDistance">Walk changed to {{ distanceInMetres }}</p>
-        </form>
+        <template v-if="form.distanceLeftToTravel > 0">
+          <form v-on:submit.prevent="updateWalk">
+                    <label for="add-steps">Add some steps:</label>
+                    <input id="add-steps" type="number" v-model.number="stepsAdded">
+                    <input type="submit" value="Update Walk Distance">
+                    <p v-if="distanceInMetres != existingWalk.totalDistance">Walk changed to {{ distanceInMetres }}</p>
+                  </form>
 
-        <form v-on:submit.prevent="deactivateWalk">
-          <input type="submit" value="Deactivate Walk">
-        </form>
+          <form v-on:submit.prevent="deactivateWalk">
+            <input type="submit" value="Deactivate Walk">
+          </form>
+        </template>
       </section>
     </div>
 </template>
@@ -146,9 +152,15 @@
               this.form.post(`/walks`)
             },
             updateWalk: function() {
-              this.existingWalk.distanceLeftToTravel -= this.stepsAdded
-              this.form.distanceLeftToTravel -= this.stepsAdded
-              this.form.patch(`/walks/${this.existingWalk.id}`)
+              if (this.existingWalk.distanceLeftToTravel > this.stepsAdded) {
+                  this.existingWalk.distanceLeftToTravel -= this.stepsAdded
+                  this.form.distanceLeftToTravel -= this.stepsAdded
+                  this.form.patch(`/walks/${this.existingWalk.id}`)
+              } else {
+                  this.existingWalk.distanceLeftToTravel = 0
+                  this.form.distanceLeftToTravel = 0
+                  this.deactivateWalk()
+              }
             },
             deactivateWalk: function() {
               this.existingWalk.isActive = false
