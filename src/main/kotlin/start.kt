@@ -4,7 +4,6 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO User can close and restart a walk - closing redirects you to create a walk.  Reactivating an existing walk should prompt you to deactivate any current walk
 //    TODO Completing a walk redirects you to the archive
 //    TODO Home page should be the current walk or creating a new walk
 //    TODO Add navigation
