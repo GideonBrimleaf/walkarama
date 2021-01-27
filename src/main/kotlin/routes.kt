@@ -37,7 +37,6 @@ private fun RouteGroup.addWalksRoutes() {
     get("/<id>/edit", WalkController::edit).name("edit")
     delete("/<id>", WalkController::delete).name("delete")
     patch("/<id>", WalkController::update).name("update")
-    patch("/<id>/deactivate", WalkController::deactivate).name("deactivate")
 }
 
 private fun Router.apiRoutes() {
