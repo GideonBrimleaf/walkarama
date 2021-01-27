@@ -22,6 +22,10 @@
           <input type="submit" value="Update Walk Distance">
           <p v-if="distanceInMetres != existingWalk.totalDistance">Walk changed to {{ distanceInMetres }}</p>
         </form>
+
+        <form v-on:submit.prevent="deactivateWalk">
+          <input type="submit" value="Deactivate Walk">
+        </form>
       </section>
     </div>
 </template>
@@ -44,7 +48,8 @@
                 startPointLng: null,
                 endPointLat: null, 
                 endPointLng: null,
-                distanceLeftToTravel: 0
+                distanceLeftToTravel: 0,
+                isActive: false
               }),
               stepsAdded: 0
             }
@@ -103,6 +108,7 @@
                 this.form.endPointLat = this.existingWalk.endPointLat
                 this.form.endPointLng = this.existingWalk.endPointLong
                 this.form.distanceLeftToTravel = this.existingWalk.distanceLeftToTravel
+                this.form.isActive = this.existingWalk.isActive
               }
             },
             initMarkers: function() {
@@ -142,6 +148,11 @@
             updateWalk: function() {
               this.existingWalk.distanceLeftToTravel -= this.stepsAdded
               this.form.distanceLeftToTravel -= this.stepsAdded
+              this.form.patch(`/walks/${this.existingWalk.id}`)
+            },
+            deactivateWalk: function() {
+              this.existingWalk.isActive = false
+              this.form.isActive = false
               this.form.patch(`/walks/${this.existingWalk.id}`)
             }
         }

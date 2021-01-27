@@ -60,21 +60,12 @@ class WalkController : Controller() {
         foundWalk.startPointLong = call.jsonBody?.get("startPointLng").orAbort() as Double
         foundWalk.endPointLat = call.jsonBody?.get("endPointLat").orAbort() as Double
         foundWalk.endPointLong = call.jsonBody?.get("endPointLng").orAbort() as Double
+        foundWalk.isActive = call.jsonBody?.get("isActive").orAbort() as Boolean
         foundWalk.updatedAt = Instant.now()
 
         foundWalk.flushChanges()
 
         call.acknowledge()
-    }
-
-    fun deactivate(call: HttpCall) {
-        val id = call.longParam("id").orAbort()
-        val foundWalk = Walks.findOrFail(id)
-
-        foundWalk.isActive = false
-        foundWalk.flushChanges()
-
-        call.redirect().toRouteNamed("walks.new")
     }
 
     fun new(call:HttpCall) {

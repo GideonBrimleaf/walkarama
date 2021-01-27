@@ -20,7 +20,12 @@ class Form {
   }
 
   patch(endpoint) {
-      return this.submit(endpoint, 'patch')
+      this.submit(endpoint, 'patch')
+      .then(() => {
+          if (!this.data().isActive) {
+              window.location.href = window.location.origin + '/walks/new'
+          }
+      })
   }
 
   delete(endpoint) {

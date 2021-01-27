@@ -1937,6 +1937,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -1958,7 +1962,8 @@ __webpack_require__.r(__webpack_exports__);
         startPointLng: null,
         endPointLat: null,
         endPointLng: null,
-        distanceLeftToTravel: 0
+        distanceLeftToTravel: 0,
+        isActive: false
       }),
       stepsAdded: 0
     };
@@ -2016,6 +2021,7 @@ __webpack_require__.r(__webpack_exports__);
         this.form.endPointLat = this.existingWalk.endPointLat;
         this.form.endPointLng = this.existingWalk.endPointLong;
         this.form.distanceLeftToTravel = this.existingWalk.distanceLeftToTravel;
+        this.form.isActive = this.existingWalk.isActive;
       }
     },
     initMarkers: function initMarkers() {
@@ -2063,6 +2069,11 @@ __webpack_require__.r(__webpack_exports__);
     updateWalk: function updateWalk() {
       this.existingWalk.distanceLeftToTravel -= this.stepsAdded;
       this.form.distanceLeftToTravel -= this.stepsAdded;
+      this.form.patch("/walks/".concat(this.existingWalk.id));
+    },
+    deactivateWalk: function deactivateWalk() {
+      this.existingWalk.isActive = false;
+      this.form.isActive = false;
       this.form.patch("/walks/".concat(this.existingWalk.id));
     }
   }
@@ -3314,6 +3325,23 @@ var render = function() {
                     _vm._v("Walk changed to " + _vm._s(_vm.distanceInMetres))
                   ])
                 : _vm._e()
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.deactivateWalk($event)
+                }
+              }
+            },
+            [
+              _c("input", {
+                attrs: { type: "submit", value: "Deactivate Walk" }
+              })
             ]
           )
         ])
@@ -15624,7 +15652,13 @@ var Form = /*#__PURE__*/function () {
   }, {
     key: "patch",
     value: function patch(endpoint) {
-      return this.submit(endpoint, 'patch');
+      var _this2 = this;
+
+      this.submit(endpoint, 'patch').then(function () {
+        if (!_this2.data().isActive) {
+          window.location.href = window.location.origin + '/walks/new';
+        }
+      });
     }
   }, {
     key: "delete",
@@ -15634,12 +15668,12 @@ var Form = /*#__PURE__*/function () {
   }, {
     key: "submit",
     value: function submit(endpoint) {
-      var _this2 = this;
+      var _this3 = this;
 
       var requestType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'post';
       this.isWorking = true;
       return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this)).then(function () {
-        return _this2.isWorking = false;
+        return _this3.isWorking = false;
       });
     }
   }, {
