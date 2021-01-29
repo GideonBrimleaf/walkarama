@@ -1,4 +1,4 @@
-{% extends "layout/base.peb" %}
+{% extends "layout/app.peb" %}
 {% block content %}
     <main>
         <form action="{{ route('walks.update', {"id" : walk.id}) }}" method="POST">
