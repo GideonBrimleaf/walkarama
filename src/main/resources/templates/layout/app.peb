@@ -86,6 +86,12 @@
                                  src="{{ auth.user.gravatarUrl() }}" alt="{{ auth.user.email }}">
                             <span class="ml-3 text-gray-700">{{ auth.user.email }}</span>
                         </div>
+                        <nav class="flex items-center ml-2">
+                            <ul>
+                                <li class="inline-block"><a href="{{ route('walks.show_active') }}">Current Walk</a></li>
+                                <li class="inline-block"><a href="{{ route('walks.list') }}">Archive</a></li>
+                            </ul>
+                        </nav>
                     {% endauth %}
                 </div>
             </div>
