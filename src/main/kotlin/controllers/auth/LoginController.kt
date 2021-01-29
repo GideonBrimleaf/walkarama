@@ -6,5 +6,5 @@ import dev.alpas.http.HttpCall
 import dev.alpas.routing.Controller
 
 class LoginController : Controller(), HandlesUserLogin {
-    override fun afterLoginRedirectTo(call: HttpCall) = "/walks/current"
+    override fun afterLoginRedirectTo(call: HttpCall) = route("walks.show_active")
 }
