@@ -11,6 +11,14 @@
 </head>
 
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href={{ route('walks.show_active') }}>Current Walk</a></li>
+                <li><a href={{ route('walks.list') }}>Archive</a></li>
+            </ul>
+        </nav>
+    </header>
     <div id="app" class="flex h-screen m-auto flex-col">
         {% block content %}
 
