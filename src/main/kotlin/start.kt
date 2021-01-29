@@ -4,7 +4,6 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO Add navigation
 //    TODO Add invites
 //    TODO Make this actually look decent
 //    TODO Show user progression along walk

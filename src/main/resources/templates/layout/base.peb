@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Alpas - The Rapid and Delightful Kotlin Web Framework</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="{{ mix('js/app.js') }}" defer></script>
-</head>
+        <title>Alpas - The Rapid and Delightful Kotlin Web Framework</title>
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <script src="{{ mix('js/app.js') }}" defer></script>
+    </head>
 
-<body>
-    <div id="app" class="flex h-screen m-auto flex-col">
-        {% block content %}
+    <body>
+        <div id="app" class="flex h-screen m-auto flex-col">
+            {% block content %}
 
-        {% endblock %}
-    </div>
-</body>
-
+            {% endblock %}
+        </div>
+    </body>
 </html>
