@@ -2,6 +2,7 @@ package com.radiantchamber.walkarama
 
 import com.radiantchamber.walkarama.controllers.StuffController
 import com.radiantchamber.walkarama.controllers.WalkController
+import com.radiantchamber.walkarama.controllers.WalkMembershipController
 import com.radiantchamber.walkarama.controllers.WelcomeController
 import dev.alpas.auth.authRoutes
 import dev.alpas.routing.RouteGroup
@@ -38,6 +39,7 @@ private fun RouteGroup.addWalksRoutes() {
     delete("/<id>", WalkController::delete).name("delete")
     patch("/<id>", WalkController::update).name("update")
     patch("/<id>/reactivate", WalkController::reactivate).name("reactivate")
+    post("/<id>/membership", WalkMembershipController::add).name("membership_add")
 }
 
 private fun Router.apiRoutes() {
