@@ -1,11 +1,13 @@
 package com.radiantchamber.walkarama.controllers
 
+import com.radiantchamber.walkarama.entities.User
 import com.radiantchamber.walkarama.entities.Users
 import com.radiantchamber.walkarama.entities.WalkMemberships
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
 import dev.alpas.routing.Controller
+import me.liuwj.ktorm.dsl.delete
 import me.liuwj.ktorm.dsl.eq
 import me.liuwj.ktorm.entity.findById
 import me.liuwj.ktorm.entity.findOne
@@ -23,7 +25,21 @@ class WalkMembershipController : Controller() {
             it.updatedAt to now
         }
 
-        flash("success", "${invitee.name} <${invitee.email}> is now a member of this project")
+        flash("success", "${invitee.name} <${invitee.email}> has joined your walk")
+        call.redirect().back()
+    }
+
+    fun delete(call: HttpCall) {
+        val memberId = call.longParam("member_id").orAbort()
+        val walkId = call.longParam("id").orAbort()
+        val member = Users.findById(memberId)
+
+        WalkMemberships.delete {
+            it.walkId eq walkId
+            it.userId eq memberId
+        }
+
+        flash("success", "${member?.name} <${member?.email}> has been removed from the walk")
         call.redirect().back()
     }
 }
