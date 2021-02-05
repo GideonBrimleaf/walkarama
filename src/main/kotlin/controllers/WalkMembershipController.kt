@@ -1,6 +1,5 @@
 package com.radiantchamber.walkarama.controllers
 
-import com.radiantchamber.walkarama.entities.User
 import com.radiantchamber.walkarama.entities.Users
 import com.radiantchamber.walkarama.entities.WalkMemberships
 import dev.alpas.http.HttpCall
@@ -23,6 +22,12 @@ class WalkMembershipController : Controller() {
             it.userId to invitee.id
             it.createdAt to now
             it.updatedAt to now
+        }
+
+        val inviteeActiveWalk = invitee.walks.find { it.isActive }
+        if (inviteeActiveWalk != null) {
+            inviteeActiveWalk.isActive = false
+            inviteeActiveWalk.flushChanges()
         }
 
         flash("success", "${invitee.name} <${invitee.email}> has joined your walk")
