@@ -1,9 +1,6 @@
 package com.radiantchamber.walkarama.entities
 
-import dev.alpas.ozone.OzoneEntity
-import dev.alpas.ozone.OzoneTable
-import dev.alpas.ozone.bigIncrements
-import dev.alpas.ozone.string
+import dev.alpas.ozone.*
 import me.liuwj.ktorm.schema.boolean
 import me.liuwj.ktorm.schema.double
 import me.liuwj.ktorm.schema.long
@@ -21,6 +18,7 @@ interface Walk : OzoneEntity<Walk> {
     var endPointLat: Double
     var endPointLong: Double
     var isActive: Boolean
+    val members get() = hasMany(WalkMemberships).map { it.member }
     var createdAt: Instant?
     var updatedAt: Instant?
 

@@ -4,5 +4,17 @@
     <main>
         <h1>Here's your Walks!</h1>
         <google-map walk :existing-walk="{{ walk | json_encode }}"></google-map>
+        <section>
+            <h3>People Joining you on this walk:</h3>
+            <ul>
+            {% for member in walk.members %}
+                <li>
+                    <img class="rounded-full w-6 h-6 mr-2"
+                         src="{{ member.gravatarUrl() }}" alt="{{ member.name }}">
+                    {{ member.name }} &lt;{{ member.email }}&gt;
+                </li>
+            {% endfor %}
+            </ul>
+        </section>
     </main>
 {% endblock %}
