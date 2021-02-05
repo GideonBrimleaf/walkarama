@@ -5,6 +5,7 @@ import dev.alpas.auth.BaseUsersTable
 import dev.alpas.ozone.OzoneEntity
 import me.liuwj.ktorm.dsl.eq
 import me.liuwj.ktorm.entity.findList
+import me.liuwj.ktorm.entity.findOne
 
 // https://alpas.dev/docs/ozone#dao
 interface User : BaseUser<User> {
@@ -12,6 +13,7 @@ interface User : BaseUser<User> {
     override val mustVerifyEmail get() = true
 
     val walks get() = Walks.findList { it.ownerId eq id }
+    val memberships get() = WalkMemberships.findList { it.userId eq id }.map { it.walk }
 
     companion object : OzoneEntity.Of<User>()
 }

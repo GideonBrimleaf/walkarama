@@ -30,9 +30,12 @@ class WalkController : Controller() {
         val user = call.caller<User>()
 
         val activeWalk = user.walks.firstOrNull { it.isActive }
+        val activeMembership = user.memberships.find { it.isActive }
 
         if (activeWalk != null) {
             call.render("walks_active", "walk" to activeWalk)
+        } else if (activeMembership != null){
+            call.render("walks_active", "walk" to activeMembership)
         } else {
             call.redirect().toRouteNamed("walks.new")
         }
