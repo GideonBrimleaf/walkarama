@@ -14,7 +14,7 @@ class AddUserStrideLengthColumn : Migration() {
     
     override fun down() {
         modifyTable(Users) {
-            // dropColumn("oldColumn1", "oldColumn2")
+             dropColumn("stride_length")
         }
     }
 }
