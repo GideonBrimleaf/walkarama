@@ -1,20 +1,16 @@
 package com.radiantchamber.walkarama.controllers
 
 import com.radiantchamber.walkarama.entities.User
+import com.radiantchamber.walkarama.entities.WalkMemberships
 import com.radiantchamber.walkarama.entities.Walks
-import com.radiantchamber.walkarama.entities.Walks.endPointLat
-import com.radiantchamber.walkarama.entities.Walks.startPointLong
 import dev.alpas.auth.middleware.VerifiedEmailOnlyMiddleware
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
-import dev.alpas.ozone.findOneOrFail
 import dev.alpas.ozone.findOrFail
 import dev.alpas.routing.Controller
 import dev.alpas.routing.ControllerMiddleware
 import me.liuwj.ktorm.dsl.*
-import me.liuwj.ktorm.entity.findAll
-import me.liuwj.ktorm.entity.findOne
 import java.time.Instant
 
 class WalkController : Controller() {
@@ -105,12 +101,21 @@ class WalkController : Controller() {
         call.acknowledge(201)
     }
 
-    fun reactivate(call:HttpCall) {
+    fun reactivate(call: HttpCall) {
         val user = call.caller<User>()
         Walks.update {
             it.isActive to false
             where {
                 Walks.ownerId eq user.id
+            }
+        }
+
+        val activeMembership = user.memberships.find { it.isActive }
+
+        if(activeMembership != null) {
+            WalkMemberships.delete {
+                it.userId eq user.id
+                it.walkId eq activeMembership.id
             }
         }
 
