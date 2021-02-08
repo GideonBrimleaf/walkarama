@@ -43,4 +43,16 @@
                 </button>
             </form>
         {% endfor %}
+        <h1>Walks You Joined:</h1>
+        {% for walk in memberships %}
+            <p>Name - {{ walk.name }}</p>
+            <p>Owner - {{ walk.owner.name }}</p>
+            <p>Total Distance - {{ walk.totalDistance }}</p>
+            {% if walk.distanceLeftToTravel <= 0 %}
+                <p>Distance Left to Travel - Complete!</p>
+            {% else %}
+                <p>Distance Left to Travel - {{ walk.distanceLeftToTravel }}</p>
+            {% endif %}
+            <p>Currently Active - {{ walk.isActive }}</p>
+        {% endfor %}
 {% endblock %}

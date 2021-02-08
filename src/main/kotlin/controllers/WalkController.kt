@@ -19,7 +19,9 @@ class WalkController : Controller() {
     fun index(call: HttpCall) {
         val user = call.caller<User>()
         val walks = user.walks
-        call.render("walks", "walks" to walks)
+        val memberships = user.memberships
+
+        call.render("walks", mapOf("walks" to walks, "memberships" to memberships))
     }
 
     fun showActive(call: HttpCall) {

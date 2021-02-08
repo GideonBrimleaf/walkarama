@@ -4,8 +4,6 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO Reactivating one of your walks should remove you from any walks you're a member of (set membership to inactive)
-//    TODO Deactivating a current walk should archive it for both user and members (should already be done but check)
 //    TODO User can see latest activity from walk (like projects)
 //    TODO User can input estimated stride length for each step
 //    TODO If invited - user should be redirected on all routes to a view to accept the invite
