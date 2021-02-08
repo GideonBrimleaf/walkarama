@@ -29,7 +29,8 @@ class Form {
   }
 
   delete(endpoint) {
-      return this.submit(endpoint, 'delete')
+      this.submit(endpoint, 'delete')
+      .then(() => window.location.href = window.location.origin + '/walks/new')
   }
 
   submit(endpoint, requestType = 'post') {

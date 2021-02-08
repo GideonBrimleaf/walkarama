@@ -1947,11 +1947,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
   props: {
     existingWalk: {
+      type: Object,
+      required: false,
+      "default": function _default() {}
+    },
+    user: {
       type: Object,
       required: false,
       "default": function _default() {}
@@ -2087,6 +2095,9 @@ __webpack_require__.r(__webpack_exports__);
       this.existingWalk.isActive = false;
       this.form.isActive = false;
       this.form.patch("/walks/".concat(this.existingWalk.id));
+    },
+    leaveWalk: function leaveWalk() {
+      this.form["delete"]("/walks/".concat(this.existingWalk.id, "/membership/").concat(this.user.id));
     }
   }
 });
@@ -3358,22 +3369,39 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.deactivateWalk($event)
-                        }
-                      }
-                    },
-                    [
-                      _c("input", {
-                        attrs: { type: "submit", value: "Deactivate Walk" }
-                      })
-                    ]
-                  )
+                  _vm.existingWalk.owner.id === _vm.user.id
+                    ? _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.deactivateWalk($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("input", {
+                            attrs: { type: "submit", value: "Deactivate Walk" }
+                          })
+                        ]
+                      )
+                    : _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.leaveWalk($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("input", {
+                            attrs: { type: "submit", value: "Leave Walk" }
+                          })
+                        ]
+                      )
                 ]
               : _vm._e()
           ],
@@ -15697,7 +15725,9 @@ var Form = /*#__PURE__*/function () {
   }, {
     key: "delete",
     value: function _delete(endpoint) {
-      return this.submit(endpoint, 'delete');
+      this.submit(endpoint, 'delete').then(function () {
+        return window.location.href = window.location.origin + '/walks/new';
+      });
     }
   }, {
     key: "submit",

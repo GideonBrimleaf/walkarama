@@ -45,6 +45,6 @@ class WalkMembershipController : Controller() {
         }
 
         flash("success", "${member?.name} <${member?.email}> has been removed from the walk")
-        call.redirect().back()
+        call.acknowledge(201)
     }
 }

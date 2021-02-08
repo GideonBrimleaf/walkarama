@@ -3,7 +3,7 @@
 {% block content %}
     <main>
         <h1>Here's your Walks!</h1>
-        <google-map walk :existing-walk="{{ walk | json_encode }}"></google-map>
+        <google-map walk :existing-walk="{{ walk | json_encode }}" :user="{{ auth.user | json_encode }}"></google-map>
         <section>
             <h3>People Joining you on this walk:</h3>
             <ul>

@@ -28,8 +28,11 @@
                     <p v-if="distanceInMetres != existingWalk.totalDistance">Walk changed to {{ distanceInMetres }}</p>
                   </form>
 
-          <form v-on:submit.prevent="deactivateWalk">
+          <form v-if="existingWalk.owner.id === user.id" v-on:submit.prevent="deactivateWalk">
             <input type="submit" value="Deactivate Walk">
+          </form>
+          <form v-else v-on:submit.prevent="leaveWalk">
+            <input type="submit" value="Leave Walk">
           </form>
         </template>
       </section>
@@ -41,7 +44,8 @@
     export default {
         name: "GoogleMap",
         props: {
-          existingWalk: {type: Object, required: false, default: () => {}}
+          existingWalk: {type: Object, required: false, default: () => {}},
+          user: {type: Object, required: false, default: () => {}}
         },
         data() {
             return {
@@ -166,6 +170,9 @@
               this.existingWalk.isActive = false
               this.form.isActive = false
               this.form.patch(`/walks/${this.existingWalk.id}`)
+            },
+            leaveWalk: function() {
+              this.form.delete(`/walks/${this.existingWalk.id}/membership/${this.user.id}`)
             }
         }
     }
