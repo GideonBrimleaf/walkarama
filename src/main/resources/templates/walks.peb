@@ -43,7 +43,8 @@
                 </button>
             </form>
         {% endfor %}
-        <h1>Walks You Joined:</h1>
+        {% if memberships.size > 0 %}
+        <h1>Walks You Joined ({{ memberships.size }}):</h1>
         {% for walk in memberships %}
             <p>Name - {{ walk.name }}</p>
             <p>Owner - {{ walk.owner.name }}</p>
@@ -55,4 +56,6 @@
             {% endif %}
             <p>Currently Active - {{ walk.isActive }}</p>
         {% endfor %}
+        {% endif %}
+    </main>
 {% endblock %}
