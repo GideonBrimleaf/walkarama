@@ -31,9 +31,6 @@
           <form v-if="existingWalk.owner.id === user.id" v-on:submit.prevent="deactivateWalk">
             <input type="submit" value="Deactivate Walk">
           </form>
-          <form v-else v-on:submit.prevent="leaveWalk">
-            <input type="submit" value="Leave Walk">
-          </form>
         </template>
       </section>
     </section>
@@ -170,9 +167,6 @@
               this.existingWalk.isActive = false
               this.form.isActive = false
               this.form.patch(`/walks/${this.existingWalk.id}`)
-            },
-            leaveWalk: function() {
-              this.form.delete(`/walks/${this.existingWalk.id}/membership/${this.user.id}`)
             }
         }
     }

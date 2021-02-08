@@ -61,6 +61,13 @@
             {% endfor %}
             </ul>
         </section>
+        <form action="{{ route('walks.membership_remove', {"id": walk.id, "member_id": auth.user.id}) }}" method="POST">
+        {% csrf %}
+            <input type="hidden" name="_method" value="delete"/>
+            <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
+                Leave Walk
+            </button>
+        </form>
         {% endif %}
     </main>
 {% endblock %}

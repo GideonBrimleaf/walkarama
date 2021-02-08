@@ -1947,9 +1947,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -2095,9 +2092,6 @@ __webpack_require__.r(__webpack_exports__);
       this.existingWalk.isActive = false;
       this.form.isActive = false;
       this.form.patch("/walks/".concat(this.existingWalk.id));
-    },
-    leaveWalk: function leaveWalk() {
-      this.form["delete"]("/walks/".concat(this.existingWalk.id, "/membership/").concat(this.user.id));
     }
   }
 });
@@ -3386,22 +3380,7 @@ var render = function() {
                           })
                         ]
                       )
-                    : _c(
-                        "form",
-                        {
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.leaveWalk($event)
-                            }
-                          }
-                        },
-                        [
-                          _c("input", {
-                            attrs: { type: "submit", value: "Leave Walk" }
-                          })
-                        ]
-                      )
+                    : _vm._e()
                 ]
               : _vm._e()
           ],
@@ -15725,9 +15704,7 @@ var Form = /*#__PURE__*/function () {
   }, {
     key: "delete",
     value: function _delete(endpoint) {
-      this.submit(endpoint, 'delete').then(function () {
-        return window.location.href = window.location.origin + '/walks/new';
-      });
+      this.submit(endpoint, 'delete');
     }
   }, {
     key: "submit",
