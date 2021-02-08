@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section>
       <div id="map" ref="mapContainer"></div>
       <section v-if="!existingWalk && markers.length === 2">
         <p>Distance selected: {{ distanceInMetres }}m</p>
@@ -36,7 +36,7 @@
           </form>
         </template>
       </section>
-    </div>
+    </section>
 </template>
 
 <script>

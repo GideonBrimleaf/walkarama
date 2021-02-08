@@ -4,6 +4,7 @@
     <main>
         <h1>Here's your Walks!</h1>
         <google-map walk :existing-walk="{{ walk | json_encode }}" :user="{{ auth.user | json_encode }}"></google-map>
+        {% if auth.user.id == walk.owner.id %}
         <section>
             <h3>People Joining you on this walk:</h3>
             <ul>
@@ -22,7 +23,6 @@
                 </li>
             {% endfor %}
             </ul>
-            {% if auth.user.id == walk.owner.id %}
             <form action="{{ route('walks.membership_add', {'id': walk.id}) }}" method="post"
                   class="p-6 {{ errors.isEmpty() ? '' : 'border-red-500 border' }}">
             {% csrf %}
@@ -40,7 +40,27 @@
                 <p class="text-red-600 text-sm mt-2">{{ firstError('email') }}</p>
             {% endif %}
             </form>
-            {% endif %}
         </section>
+        {% else %}
+        <section>
+            <h3>People Joining you on this walk:</h3>
+            <ul>
+                <li>
+                    <img class="rounded-full w-6 h-6 mr-2"
+                         src="{{ walk.owner.gravatarUrl() }}" alt="{{ walk.owner.name }}">
+                    {{ walk.owner.name }} &lt;{{ walk.owner.email }}> - Walk Leader
+                </li>
+            {% for member in walk.members %}
+            {% if member.id != auth.user.id %}
+                <li>
+                    <img class="rounded-full w-6 h-6 mr-2"
+                         src="{{ member.gravatarUrl() }}" alt="{{ member.name }}">
+                    {{ member.name }} &lt;{{ member.email }}&gt;
+                </li>
+            {% endif %}
+            {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
     </main>
 {% endblock %}
