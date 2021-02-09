@@ -10,10 +10,8 @@ import dev.alpas.ozone.from
 // https://alpas.dev/docs/seeding
 internal class DatabaseSeeder : Seeder() {
     override fun run(app: Application) {
-        val randomUsers = from(UserFactory(app.make()),2)
+        from(UserFactory(app.make()),2)
 
-        from(WalkFactory(), 2, mapOf("owner_id" to randomUsers.first().id))
-        from(WalkFactory(), 3, mapOf("owner_id" to randomUsers.last().id))
-
+        WalksSeeder().run(app)
     }
 }
