@@ -13,11 +13,13 @@
             </div>
         {% endif %}
         <h1>{{ user.name }}</h1>
-        <p><{{ user.email }}></p>
-        <form action="/" method="post">
+        <p>{{ user.email }}</p>
+        <form action="{{ route('users.update', {"id": user.id}) }}" method="post">
+            {% csrf %}
+            <input type="hidden" name="_method" value="patch"/>
             <label for="stride_length">Stride Length:</label>
-            <input type="text" placeholder="{{ user.strideLength }}">
-            <input type="textsubmit" value="Update">
+            <input type="text" name="stride_length" placeholder="{{ user.strideLength }}">
+            <input type="submit" value="Update">
         </form>
     </main>
 {% endblock %}

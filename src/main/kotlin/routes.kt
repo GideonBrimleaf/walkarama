@@ -46,6 +46,7 @@ private fun RouteGroup.addWalksRoutes() {
 private fun RouteGroup.addUserRoutes() {
     get("/<id>", UserController::show).name("show")
     get("/<id>/edit", UserController::edit).name("edit")
+    patch("/<id>", UserController::update).name("update")
 }
 
 private fun Router.apiRoutes() {

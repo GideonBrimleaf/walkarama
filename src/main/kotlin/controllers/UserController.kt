@@ -17,4 +17,13 @@ class UserController : Controller() {
         val user = call.caller<User>()
         call.render("user_edit", "user" to user)
     }
+
+    fun update(call: HttpCall) {
+        val user = call.caller<User>()
+
+        user.strideLength = call.intParam("stride_length").orAbort()
+        user.flushChanges()
+
+        call.redirect().toRouteNamed("users.show", mapOf("id" to user.id))
+    }
 }

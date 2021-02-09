@@ -17,7 +17,7 @@ interface User : BaseUser<User> {
 
     val walks get() = Walks.findList { it.ownerId eq id }
     val memberships get() = WalkMemberships.findList { it.userId eq id }.map { it.walk }
-    val strideLength: Int
+    var strideLength: Int
 
     companion object : OzoneEntity.Of<User>()
 }
