@@ -43,7 +43,7 @@
                 </button>
             </form>
         {% endfor %}
-        {% if  > 0 %}
+        {% if auth.user.memberships.size > 0 %}
         <h1>Walks You Joined ({{ memberships.size }}):</h1>
         {% for walk in memberships %}
             <p>Name - {{ walk.name }}</p>
