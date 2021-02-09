@@ -26,20 +26,13 @@ class WalkController : Controller() {
 
     fun showActive(call: HttpCall) {
         val user = call.caller<User>()
-
         val activeWalk = user.walks.firstOrNull { it.isActive }
         val activeMembership = user.memberships.find { it.isActive }
 
         when {
-            activeWalk != null -> {
-                call.render("walks_active", "walk" to activeWalk)
-            }
-            activeMembership != null -> {
-                call.render("walks_active", "walk" to activeMembership)
-            }
-            else -> {
-                call.redirect().toRouteNamed("walks.new")
-            }
+            activeWalk != null -> call.render("walks_active", "walk" to activeWalk)
+            activeMembership != null -> call.render("walks_active", "walk" to activeMembership)
+            else -> call.redirect().toRouteNamed("walks.new")
         }
     }
 
@@ -69,7 +62,6 @@ class WalkController : Controller() {
         foundWalk.updatedAt = Instant.now()
 
         foundWalk.flushChanges()
-
         call.acknowledge()
     }
 
@@ -78,11 +70,8 @@ class WalkController : Controller() {
         val activeWalk = user.walks.firstOrNull { it.isActive }
         val activeMembership = user.memberships.find { it.isActive }
 
-        if (activeWalk != null || activeMembership != null) {
-            call.redirect().toRouteNamed("walks.show_active")
-        } else {
-            call.render("walk_new")
-        }
+        if (activeWalk != null || activeMembership != null) call.redirect().toRouteNamed("walks.show_active")
+        else call.render("walk_new")
     }
 
     fun create(call:HttpCall) {
