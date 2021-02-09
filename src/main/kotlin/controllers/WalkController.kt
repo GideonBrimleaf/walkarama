@@ -54,15 +54,9 @@ class WalkController : Controller() {
         val id = call.longParam("id").orAbort()
         val foundWalk = Walks.findOrFail(id)
 
-        val processedDistanceLeftToTravel = if (call.jsonBody?.get("distanceLeftToTravel").orAbort() == 0) {
-            (call.jsonBody?.get("distanceLeftToTravel").orAbort() as Int).toDouble()
-        } else {
-            call.jsonBody?.get("distanceLeftToTravel").orAbort() as Double
-        }
-
         foundWalk.name = call.jsonBody?.get("name").toString().orAbort()
-        foundWalk.totalDistance = call.jsonBody?.get("distanceInMetres").orAbort() as Double
-        foundWalk.distanceLeftToTravel = processedDistanceLeftToTravel
+        foundWalk.totalDistance = call.jsonBody?.get("distanceInMetres").orAbort() as Int
+        foundWalk.distanceLeftToTravel = call.jsonBody?.get("distanceLeftToTravel").orAbort() as Int
         foundWalk.startPointLat = call.jsonBody?.get("startPointLat").orAbort() as Double
         foundWalk.startPointLong = call.jsonBody?.get("startPointLng").orAbort() as Double
         foundWalk.endPointLat = call.jsonBody?.get("endPointLat").orAbort() as Double

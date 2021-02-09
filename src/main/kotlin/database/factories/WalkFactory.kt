@@ -13,7 +13,7 @@ internal class WalkFactory : EntityFactory<Walk, Walks>() {
     override fun entity(): Walk {
         // https://alpas.dev/docs/ozone
 
-        val randomDistance = 2929.02
+        val randomDistance = 2929
 
         return Walk {
             name = faker.funnyName().name()

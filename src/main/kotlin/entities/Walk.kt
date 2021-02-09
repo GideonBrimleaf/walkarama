@@ -1,18 +1,15 @@
 package com.radiantchamber.walkarama.entities
 
 import dev.alpas.ozone.*
-import me.liuwj.ktorm.schema.boolean
-import me.liuwj.ktorm.schema.double
-import me.liuwj.ktorm.schema.long
-import me.liuwj.ktorm.schema.timestamp
+import me.liuwj.ktorm.schema.*
 import java.time.Instant
 
 interface Walk : OzoneEntity<Walk> {
     var id: Long
     var name: String?
     var owner: User
-    var totalDistance: Double
-    var distanceLeftToTravel: Double
+    var totalDistance: Int
+    var distanceLeftToTravel: Int
     var startPointLat: Double
     var startPointLong: Double
     var endPointLat: Double
@@ -29,8 +26,8 @@ object Walks : OzoneTable<Walk>("walks") {
     val id by bigIncrements()
     val name by string("name").size(150).nullable().bindTo { it.name }
     val ownerId by long("owner_id").belongsTo(Users) { it.owner }
-    val totalDistance by double("total_distance").nullable().bindTo { it.totalDistance }
-    val distanceLeftToTravel by double("distance_left_to_travel").nullable().bindTo { it.distanceLeftToTravel }
+    val totalDistance by int("total_distance").nullable().bindTo { it.totalDistance }
+    val distanceLeftToTravel by int("distance_left_to_travel").nullable().bindTo { it.distanceLeftToTravel }
     val startPointLat by double("start_point_lat").nullable().bindTo { it.startPointLat }
     val startPointLong by double("start_point_long").nullable().bindTo { it.startPointLong }
     val endPointLat by double("end_point_lat").nullable().bindTo { it.endPointLat }

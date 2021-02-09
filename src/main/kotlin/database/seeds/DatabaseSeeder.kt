@@ -1,7 +1,6 @@
 package com.radiantchamber.walkarama.database.seeds
 
 import com.radiantchamber.walkarama.database.factories.UserFactory
-import com.radiantchamber.walkarama.database.factories.WalkFactory
 import dev.alpas.Application
 import dev.alpas.make
 import dev.alpas.ozone.Seeder
