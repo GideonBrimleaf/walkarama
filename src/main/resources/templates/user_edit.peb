@@ -17,8 +17,8 @@
         <form action="{{ route('users.update', {"id": user.id}) }}" method="post">
             {% csrf %}
             <input type="hidden" name="_method" value="patch"/>
-            <label for="stride_length">Stride Length:</label>
-            <input type="text" name="stride_length" placeholder="{{ user.strideLength }}">
+            <label for="stride_length">Stride Length (m):</label>
+            <input type="text" name="stride_length" placeholder="{{ user.strideLength / 100 }}">
             <input type="submit" value="Update">
         </form>
     </main>

@@ -21,7 +21,7 @@ class UserController : Controller() {
     fun update(call: HttpCall) {
         val user = call.caller<User>()
 
-        user.strideLength = call.intParam("stride_length").orAbort()
+        user.strideLength = call.intParam("stride_length").orAbort() * 100
         user.flushChanges()
 
         call.redirect().toRouteNamed("users.show", mapOf("id" to user.id))
