@@ -2079,8 +2079,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateWalk: function updateWalk() {
       if (this.existingWalk.distanceLeftToTravel > this.stepsAdded) {
-        this.existingWalk.distanceLeftToTravel -= this.stepsAdded;
-        this.form.distanceLeftToTravel -= this.stepsAdded;
+        this.existingWalk.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
+        this.form.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
         this.form.patch("/walks/".concat(this.existingWalk.id));
       } else {
         this.existingWalk.distanceLeftToTravel = 0;
