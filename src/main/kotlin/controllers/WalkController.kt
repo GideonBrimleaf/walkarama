@@ -78,8 +78,8 @@ class WalkController : Controller() {
         Walks.create {
             it.name to call.jsonBody?.get("name")
             it.ownerId to call.user.id
-            it.totalDistance to call.jsonBody?.get("distanceInMetres")
-            it.distanceLeftToTravel to call.jsonBody?.get("distanceInMetres")
+            it.totalDistance to (call.jsonBody?.get("distanceInMetres") as Double * 100).toInt()
+            it.distanceLeftToTravel to (call.jsonBody?.get("distanceInMetres") as Double * 100).toInt()
             it.startPointLat to call.jsonBody?.get("startPointLat")
             it.startPointLong to call.jsonBody?.get("startPointLng")
             it.endPointLat to call.jsonBody?.get("endPointLat")

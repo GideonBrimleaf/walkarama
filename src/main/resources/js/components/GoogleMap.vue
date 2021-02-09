@@ -12,8 +12,8 @@
       </section>
 
       <section v-if="existingWalk">
-        <h1>{{ form.name }} - {{ form.distanceInMetres }}</h1>
-        <p v-if="form.distanceLeftToTravel != 0">Distance left: {{ form.distanceLeftToTravel }}</p>
+        <h1>{{ form.name }} - {{ form.distanceInMetres / 100 }}m</h1>
+        <p v-if="form.distanceLeftToTravel !== 0">Distance left: {{ form.distanceLeftToTravel / 100 }}m</p>
         <template v-else>
           <p>Distance left: Completed!</p>
           <a href="/walks">View Your Completed Walks</a>
@@ -22,11 +22,10 @@
 
         <template v-if="form.distanceLeftToTravel > 0">
           <form v-on:submit.prevent="updateWalk">
-                    <label for="add-steps">Add some steps:</label>
-                    <input id="add-steps" type="number" v-model.number="stepsAdded">
-                    <input type="submit" value="Update Walk Distance">
-                    <p v-if="distanceInMetres != existingWalk.totalDistance">Walk changed to {{ distanceInMetres }}</p>
-                  </form>
+            <label for="add-steps">Add some steps:</label>
+            <input id="add-steps" type="number" v-model.number="stepsAdded">
+            <input type="submit" value="Update Walk Distance">
+          </form>
 
           <form v-if="existingWalk.owner.id === user.id" v-on:submit.prevent="deactivateWalk">
             <input type="submit" value="Deactivate Walk">
@@ -70,7 +69,7 @@
               this.markers[1].getPosition()
             ).toFixed(2))
 
-            this.form.distanceInMetres = result
+            this.form.distanceInMetres = result * 100
 
             return result
             }
@@ -88,7 +87,8 @@
               const script = document.createElement('script');
               script.async = true;
               script.defer = true;
-              script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=${callbackName}&libraries=geometry`;
+              script.src =
+                `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=${callbackName}&libraries=geometry`;
               document.querySelector('head').appendChild(script);
             },
             initMap: function() {
@@ -109,7 +109,7 @@
                 this.initMarkers()
 
                 this.form.name = this.existingWalk.name
-                this.form.distanceInMetres = this.existingWalk.distanceInMetres
+                this.form.distanceInMetres = this.existingWalk.totalDistance
                 this.form.startPointLat = this.existingWalk.startPointLat
                 this.form.startPointLng = this.existingWalk.startPointLong
                 this.form.endPointLat = this.existingWalk.endPointLat
@@ -153,7 +153,7 @@
               this.form.post(`/walks`)
             },
             updateWalk: function() {
-              if (this.existingWalk.distanceLeftToTravel > this.stepsAdded) {
+              if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * 100) {
                   this.existingWalk.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength
                   this.form.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength
                   this.form.patch(`/walks/${this.existingWalk.id}`)

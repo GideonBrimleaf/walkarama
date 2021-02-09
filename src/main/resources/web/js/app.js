@@ -1946,7 +1946,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GoogleMap",
@@ -1983,7 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
     distanceInMetres: function distanceInMetres() {
       if (this.markers.length === 2) {
         var result = parseFloat(google.maps.geometry.spherical.computeDistanceBetween(this.markers[0].getPosition(), this.markers[1].getPosition()).toFixed(2));
-        this.form.distanceInMetres = result;
+        this.form.distanceInMetres = result * 100;
         return result;
       }
     }
@@ -2026,7 +2025,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.existingWalk) {
         this.initMarkers();
         this.form.name = this.existingWalk.name;
-        this.form.distanceInMetres = this.existingWalk.distanceInMetres;
+        this.form.distanceInMetres = this.existingWalk.totalDistance;
         this.form.startPointLat = this.existingWalk.startPointLat;
         this.form.startPointLng = this.existingWalk.startPointLong;
         this.form.endPointLat = this.existingWalk.endPointLat;
@@ -2078,7 +2077,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.post("/walks");
     },
     updateWalk: function updateWalk() {
-      if (this.existingWalk.distanceLeftToTravel > this.stepsAdded) {
+      if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * 100) {
         this.existingWalk.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
         this.form.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
         this.form.patch("/walks/".concat(this.existingWalk.id));
@@ -3285,14 +3284,17 @@ var render = function() {
               _vm._v(
                 _vm._s(_vm.form.name) +
                   " - " +
-                  _vm._s(_vm.form.distanceInMetres)
+                  _vm._s(_vm.form.distanceInMetres / 100) +
+                  "m"
               )
             ]),
             _vm._v(" "),
-            _vm.form.distanceLeftToTravel != 0
+            _vm.form.distanceLeftToTravel !== 0
               ? _c("p", [
                   _vm._v(
-                    "Distance left: " + _vm._s(_vm.form.distanceLeftToTravel)
+                    "Distance left: " +
+                      _vm._s(_vm.form.distanceLeftToTravel / 100) +
+                      "m"
                   )
                 ])
               : [
@@ -3351,15 +3353,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("input", {
                         attrs: { type: "submit", value: "Update Walk Distance" }
-                      }),
-                      _vm._v(" "),
-                      _vm.distanceInMetres != _vm.existingWalk.totalDistance
-                        ? _c("p", [
-                            _vm._v(
-                              "Walk changed to " + _vm._s(_vm.distanceInMetres)
-                            )
-                          ])
-                        : _vm._e()
+                      })
                     ]
                   ),
                   _vm._v(" "),
