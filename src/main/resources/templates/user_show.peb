@@ -1,0 +1,20 @@
+{% extends "layout/app.peb" %}
+
+{% block content %}
+    <main>
+        {% if hasFlash('success') %}
+            <div class="max-w-4xl mt-10 mx-auto pt-10 w-full">
+                <div class="bg-green-100 text-green-900 mb-2 p-4 text-lg">{{ flash('success') }}</div>
+            </div>
+        {% endif %}
+        {% if hasFlash('error') %}
+            <div class="max-w-4xl mt-10 mx-auto pt-10 w-full">
+                <div class="bg-red-100 text-red-900 mb-2 p-4 text-lg">{{ flash('error') }}</div>
+            </div>
+        {% endif %}
+        <h1>{{ user.name }}</h1>
+        <p>{{ user.email }}</p>
+        <p>Stride Length - {{ user.strideLength / 100 }}m</p>
+        <a href="{{ route('users.edit', {"id": user.id}) }}"><button>Edit Stride Length</button></a>
+    </main>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout/app.peb" %}
+
+{% block content %}
+    <main>
+        {% if hasFlash('success') %}
+            <div class="max-w-4xl mt-10 mx-auto pt-10 w-full">
+                <div class="bg-green-100 text-green-900 mb-2 p-4 text-lg">{{ flash('success') }}</div>
+            </div>
+        {% endif %}
+        {% if hasFlash('error') %}
+            <div class="max-w-4xl mt-10 mx-auto pt-10 w-full">
+                <div class="bg-red-100 text-red-900 mb-2 p-4 text-lg">{{ flash('error') }}</div>
+            </div>
+        {% endif %}
+        <h1>{{ user.name }}</h1>
+        <p><{{ user.email }}></p>
+        <form action="/" method="post">
+            <label for="stride_length">Stride Length:</label>
+            <input type="text" placeholder="{{ user.strideLength }}">
+            <input type="textsubmit" value="Update">
+        </form>
+    </main>
+{% endblock %}

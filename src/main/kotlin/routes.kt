@@ -1,9 +1,6 @@
 package com.radiantchamber.walkarama
 
-import com.radiantchamber.walkarama.controllers.StuffController
-import com.radiantchamber.walkarama.controllers.WalkController
-import com.radiantchamber.walkarama.controllers.WalkMembershipController
-import com.radiantchamber.walkarama.controllers.WelcomeController
+import com.radiantchamber.walkarama.controllers.*
 import dev.alpas.auth.authRoutes
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router
@@ -28,6 +25,9 @@ private fun RouteGroup.webRoutesGroup() {
     group("/walks") {
         addWalksRoutes()
     }.name("walks").mustBeAuthenticated()
+    group("users") {
+        addUserRoutes()
+    }.name("users").mustBeAuthenticated()
 }
 
 private fun RouteGroup.addWalksRoutes() {
@@ -41,6 +41,11 @@ private fun RouteGroup.addWalksRoutes() {
     patch("/<id>/reactivate", WalkController::reactivate).name("reactivate")
     post("/<id>/membership", WalkMembershipController::add).name("membership_add")
     delete("/<id>/membership/<member_id>", WalkMembershipController::delete).name("membership_remove")
+}
+
+private fun RouteGroup.addUserRoutes() {
+    get("/<id>", UserController::show).name("show")
+    get("/<id>/edit", UserController::edit).name("edit")
 }
 
 private fun Router.apiRoutes() {
