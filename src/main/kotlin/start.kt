@@ -4,7 +4,6 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO User can input estimated stride length for each ste
 //    TODO User can see latest activity from walk (like projects)
 //    TODO If invited - user should be redirected on all routes to a view to accept the invite
 //    TODO Make this actually look decent - progression bar for walk
@@ -13,6 +12,7 @@ fun main(args: Array<String>) {
 
 //    TODO Invite should be mailed out and accepted on request, this should show as pending for the inviter
 //    TODO Show user progression along walk in map
+//    TODO Unit Testing
     val file = File(".env")
     if (!file.exists()) {
         file.createNewFile()
