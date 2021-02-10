@@ -11,7 +11,7 @@ import dev.alpas.routing.ControllerMiddleware
 import me.liuwj.ktorm.dsl.*
 import java.time.Instant
 
-class WalkController : Controller() {
+class WalkController : Controller(), CanLogWalkActivity {
     override fun middleware(call: HttpCall) = listOf(ControllerMiddleware(VerifiedEmailOnlyMiddleware::class))
 
     fun index(call: HttpCall) {
@@ -63,11 +63,11 @@ class WalkController : Controller() {
         foundWalk.flushChanges()
 
         if (foundWalk.distanceLeftToTravel == 0) {
-            logWalkActivity(foundWalk, mapOf("action" to "completed walk", "name" to foundWalk.name))
+            logWalkActivity(foundWalk, mapOf("action" to "completed walk", "name" to foundWalk.name), call)
         } else if (!foundWalk.isActive) {
-            logWalkActivity(foundWalk, mapOf("action" to "deactivated walk", "name" to foundWalk.name))
+            logWalkActivity(foundWalk, mapOf("action" to "deactivated walk", "name" to foundWalk.name), call)
         } else {
-            logWalkActivity(foundWalk, mapOf("action" to "added $stepsAdded steps to", "name" to foundWalk.name))
+            logWalkActivity(foundWalk, mapOf("action" to "added $stepsAdded steps to", "name" to foundWalk.name), call)
         }
 
         call.acknowledge(201)
@@ -95,7 +95,7 @@ class WalkController : Controller() {
             it.isActive to true
         }
 
-        logWalkActivity(newWalk, mapOf("action" to "created walk", "name" to newWalk.name))
+        logWalkActivity(newWalk, mapOf("action" to "created walk", "name" to newWalk.name), call)
         call.acknowledge(201)
     }
 
@@ -122,21 +122,8 @@ class WalkController : Controller() {
         foundWalk.isActive = true
         foundWalk.flushChanges()
 
-        logWalkActivity(foundWalk, mapOf("action" to "reactivated walk", "name" to foundWalk.name))
+        logWalkActivity(foundWalk, mapOf("action" to "reactivated walk", "name" to foundWalk.name), call)
         call.redirect().toRouteNamed("walks.show_active")
-    }
-
-    private fun logWalkActivity(walk: Walk, payload: Map<String, Any?>) {
-        val now = call.nowInCurrentTimezone().toInstant()
-        val user = caller<User>()
-
-        Activities.insert {
-            it.payload to payload
-            it.walkId to walk.id
-            it.userId to user.id
-            it.createdAt to now
-            it.updatedAt to now
-        }
     }
 
 }
