@@ -1,8 +1,6 @@
 package com.radiantchamber.walkarama.controllers
 
-import com.radiantchamber.walkarama.entities.User
-import com.radiantchamber.walkarama.entities.WalkMemberships
-import com.radiantchamber.walkarama.entities.Walks
+import com.radiantchamber.walkarama.entities.*
 import dev.alpas.auth.middleware.VerifiedEmailOnlyMiddleware
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
@@ -75,19 +73,33 @@ class WalkController : Controller() {
     }
 
     fun create(call:HttpCall) {
-        Walks.create {
+        val newWalk = Walks.create {
             it.name to call.jsonBody?.get("name")
             it.ownerId to call.user.id
-            it.totalDistance to (call.jsonBody?.get("distanceInMetres") as Double * 100).toInt()
-            it.distanceLeftToTravel to (call.jsonBody?.get("distanceInMetres") as Double * 100).toInt()
+            it.totalDistance to call.jsonBody?.get("distanceInMetres")
+            it.distanceLeftToTravel to call.jsonBody?.get("distanceInMetres")
             it.startPointLat to call.jsonBody?.get("startPointLat")
             it.startPointLong to call.jsonBody?.get("startPointLng")
             it.endPointLat to call.jsonBody?.get("endPointLat")
             it.endPointLong to call.jsonBody?.get("endPointLng")
             it.isActive to true
         }
+        logCreateWalkActivity(newWalk, mapOf("action" to "create walk", "name" to newWalk.name))
 
         call.acknowledge(201)
+    }
+
+    private fun logCreateWalkActivity(walk: Walk, payload: Map<String, Any?>) {
+        val now = call.nowInCurrentTimezone().toInstant()
+        val user = caller<User>()
+
+        Activities.insert {
+            it.payload to payload
+            it.walkId to walk.id
+            it.userId to user.id
+            it.createdAt to now
+            it.updatedAt to now
+        }
     }
 
     fun reactivate(call: HttpCall) {

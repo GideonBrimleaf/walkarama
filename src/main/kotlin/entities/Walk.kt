@@ -16,6 +16,7 @@ interface Walk : OzoneEntity<Walk> {
     var endPointLong: Double
     var isActive: Boolean
     val members get() = hasMany(WalkMemberships).map { it.member }
+    val activities get() = hasMany(Activities)
     var createdAt: Instant?
     var updatedAt: Instant?
 
