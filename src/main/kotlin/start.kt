@@ -8,9 +8,9 @@ fun main(args: Array<String>) {
 //    TODO Alpas logo should redirect to current/new walk if logged in
 //    TODO Logging in should redirect to current/new walk
 //    TODO If invited - user should be redirected on all routes to a view to accept the invite
+//    TODO Need to add guard around walk invites
 //    TODO Make this actually look decent - progression bar for walk
 //    TODO Either try mailer services or bin email verification
-//    TODO Need to add guard around walk invites
 
 //    TODO Invite should be mailed out and accepted on request, this should show as pending for the inviter
 //    TODO Show user progression along walk in map
