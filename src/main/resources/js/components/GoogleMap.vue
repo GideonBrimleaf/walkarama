@@ -153,7 +153,7 @@
               this.form.post(`/walks`)
             },
             updateWalk: function() {
-              if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * 100) {
+              if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * this.user.strideLength) {
                   this.existingWalk.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength
                   this.form.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength
                   this.form.patch(`/walks/${this.existingWalk.id}`)

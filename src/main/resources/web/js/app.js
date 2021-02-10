@@ -2077,7 +2077,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.post("/walks");
     },
     updateWalk: function updateWalk() {
-      if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * 100) {
+      if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * this.user.strideLength) {
         this.existingWalk.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
         this.form.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
         this.form.patch("/walks/".concat(this.existingWalk.id));
