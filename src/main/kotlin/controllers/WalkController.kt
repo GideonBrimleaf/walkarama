@@ -122,6 +122,7 @@ class WalkController : Controller() {
         foundWalk.isActive = true
         foundWalk.flushChanges()
 
+        logWalkActivity(foundWalk, mapOf("action" to "reactivated walk", "name" to foundWalk.name))
         call.redirect().toRouteNamed("walks.show_active")
     }
 
