@@ -84,22 +84,9 @@ class WalkController : Controller() {
             it.endPointLong to call.jsonBody?.get("endPointLng")
             it.isActive to true
         }
-        logCreateWalkActivity(newWalk, mapOf("action" to "created walk", "name" to newWalk.name))
 
+        logWalkActivity(newWalk, mapOf("action" to "created walk", "name" to newWalk.name))
         call.acknowledge(201)
-    }
-
-    private fun logCreateWalkActivity(walk: Walk, payload: Map<String, Any?>) {
-        val now = call.nowInCurrentTimezone().toInstant()
-        val user = caller<User>()
-
-        Activities.insert {
-            it.payload to payload
-            it.walkId to walk.id
-            it.userId to user.id
-            it.createdAt to now
-            it.updatedAt to now
-        }
     }
 
     fun reactivate(call: HttpCall) {
@@ -127,4 +114,18 @@ class WalkController : Controller() {
 
         call.redirect().toRouteNamed("walks.show_active")
     }
+
+    private fun logWalkActivity(walk: Walk, payload: Map<String, Any?>) {
+        val now = call.nowInCurrentTimezone().toInstant()
+        val user = caller<User>()
+
+        Activities.insert {
+            it.payload to payload
+            it.walkId to walk.id
+            it.userId to user.id
+            it.createdAt to now
+            it.updatedAt to now
+        }
+    }
+
 }

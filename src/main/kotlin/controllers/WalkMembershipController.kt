@@ -30,6 +30,8 @@ class WalkMembershipController : Controller() {
             inviteeActiveWalk.flushChanges()
         }
 
+
+
         flash("success", "${invitee.name} <${invitee.email}> has joined your walk")
         call.redirect().back()
     }
