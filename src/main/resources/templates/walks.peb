@@ -16,11 +16,11 @@
         {% for walk in walks %}
             <p>Name - {{ walk.name }}</p>
             <p>Owner - {{ walk.owner.name }}</p>
-            <p>Total Distance - {{ walk.totalDistance }}</p>
+            <p>Total Distance - {{ walk.totalDistance / 100 }}m</p>
             {% if walk.distanceLeftToTravel <= 0 %}
                 <p>Distance Left to Travel - Complete!</p>
             {% else %}
-                <p>Distance Left to Travel - {{ walk.distanceLeftToTravel }}</p>
+                <p>Distance Left to Travel - {{ walk.distanceLeftToTravel / 100 }}m</p>
             {% endif %}
             <p>Currently Active - {{ walk.isActive }}</p>
             {% if walk.isActive == false and walk.distanceLeftToTravel != 0 %}
@@ -48,11 +48,11 @@
         {% for walk in memberships %}
             <p>Name - {{ walk.name }}</p>
             <p>Owner - {{ walk.owner.name }}</p>
-            <p>Total Distance - {{ walk.totalDistance }}</p>
+            <p>Total Distance - {{ walk.totalDistance / 100 }}m</p>
             {% if walk.distanceLeftToTravel <= 0 %}
                 <p>Distance Left to Travel - Complete!</p>
             {% else %}
-                <p>Distance Left to Travel - {{ walk.distanceLeftToTravel }}</p>
+                <p>Distance Left to Travel - {{ walk.distanceLeftToTravel / 100}}m</p>
             {% endif %}
             <p>Currently Active - {{ walk.isActive }}</p>
         {% endfor %}
