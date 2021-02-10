@@ -6,6 +6,8 @@ import java.io.File
 fun main(args: Array<String>) {
 //    TODO User can see latest activity from walk (like projects)
 //    TODO Walk show page for archived walks - show map and activity list
+//    TODO Alpas logo should redirect to current/new walk if logged in
+//    TODO Logging in should redirect to current/new walk
 //    TODO If invited - user should be redirected on all routes to a view to accept the invite
 //    TODO Make this actually look decent - progression bar for walk
 //    TODO Either try mailer services or bin email verification

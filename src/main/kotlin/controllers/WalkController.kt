@@ -84,7 +84,7 @@ class WalkController : Controller() {
             it.endPointLong to call.jsonBody?.get("endPointLng")
             it.isActive to true
         }
-        logCreateWalkActivity(newWalk, mapOf("action" to "create walk", "name" to newWalk.name))
+        logCreateWalkActivity(newWalk, mapOf("action" to "created walk", "name" to newWalk.name))
 
         call.acknowledge(201)
     }
