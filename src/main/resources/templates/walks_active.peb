@@ -5,6 +5,13 @@
         <h1>Here's your Walks!</h1>
         <google-map walk :existing-walk="{{ walk | json_encode }}" :user="{{ auth.user | json_encode }}"></google-map>
         {% if auth.user.id == walk.owner.id %}
+        <form action="{{ route('walks.delete', {"id": walk.id}) }}" method="POST">
+        {% csrf %}
+            <input type="hidden" name="_method" value="delete"/>
+            <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
+                Delete Walk
+            </button>
+        </form>
         <section>
             <h3>People Joining you on this walk:</h3>
             <ul>
@@ -17,7 +24,7 @@
                     {% csrf %}
                         <input type="hidden" name="_method" value="delete"/>
                         <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
-                            Delete
+                            Remove
                         </button>
                     </form>
                 </li>
