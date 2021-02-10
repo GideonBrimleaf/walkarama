@@ -1973,7 +1973,8 @@ __webpack_require__.r(__webpack_exports__);
         endPointLat: null,
         endPointLng: null,
         distanceLeftToTravel: 0,
-        isActive: false
+        isActive: false,
+        stepsAdded: 0
       }),
       stepsAdded: 0
     };
@@ -2080,6 +2081,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * this.user.strideLength) {
         this.existingWalk.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
         this.form.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength;
+        this.form.stepsAdded = this.stepsAdded;
         this.form.patch("/walks/".concat(this.existingWalk.id));
       } else {
         this.existingWalk.distanceLeftToTravel = 0;

@@ -67,7 +67,7 @@ class WalkController : Controller() {
         } else if (!foundWalk.isActive) {
             logWalkActivity(foundWalk, mapOf("action" to "deactivated walk", "name" to foundWalk.name))
         } else {
-            logWalkActivity(foundWalk, mapOf("action" to "added some steps to", "name" to foundWalk.name))
+            logWalkActivity(foundWalk, mapOf("action" to "added $stepsAdded steps to", "name" to foundWalk.name))
         }
 
         call.acknowledge(201)

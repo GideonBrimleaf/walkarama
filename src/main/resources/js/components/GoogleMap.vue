@@ -55,7 +55,8 @@
                 endPointLat: null, 
                 endPointLng: null,
                 distanceLeftToTravel: 0,
-                isActive: false
+                isActive: false,
+                stepsAdded: 0
               }),
               stepsAdded: 0
             }
@@ -156,6 +157,7 @@
               if (this.existingWalk.distanceLeftToTravel > this.stepsAdded * this.user.strideLength) {
                   this.existingWalk.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength
                   this.form.distanceLeftToTravel -= this.stepsAdded * this.user.strideLength
+                  this.form.stepsAdded = this.stepsAdded
                   this.form.patch(`/walks/${this.existingWalk.id}`)
               } else {
                   this.existingWalk.distanceLeftToTravel = 0
