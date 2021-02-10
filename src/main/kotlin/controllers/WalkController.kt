@@ -48,6 +48,7 @@ class WalkController : Controller() {
     fun update(call: HttpCall) {
         val id = call.longParam("id").orAbort()
         val foundWalk = Walks.findOrFail(id)
+        val stepsAdded = call.jsonBody?.get("stepsAdded").toString()
 
         foundWalk.name = call.jsonBody?.get("name").toString().orAbort()
         foundWalk.totalDistance = call.jsonBody?.get("distanceInMetres").orAbort() as Int
@@ -60,7 +61,16 @@ class WalkController : Controller() {
         foundWalk.updatedAt = Instant.now()
 
         foundWalk.flushChanges()
-        call.acknowledge()
+
+        if (foundWalk.distanceLeftToTravel == 0) {
+            logWalkActivity(foundWalk, mapOf("action" to "completed walk", "name" to foundWalk.name))
+        } else if (!foundWalk.isActive) {
+            logWalkActivity(foundWalk, mapOf("action" to "deactivated walk", "name" to foundWalk.name))
+        } else {
+            logWalkActivity(foundWalk, mapOf("action" to "added some steps to", "name" to foundWalk.name))
+        }
+
+        call.acknowledge(201)
     }
 
     fun new(call:HttpCall) {
