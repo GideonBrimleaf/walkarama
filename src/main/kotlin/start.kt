@@ -4,7 +4,6 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO Logging in should redirect to current/new walk
 //    TODO If invited - user should be redirected on all routes to a view to accept the invite
 //    TODO Need to add guard around walk invites
 //    TODO Make this actually look decent - progression bar for walk
