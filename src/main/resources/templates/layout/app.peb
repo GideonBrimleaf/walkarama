@@ -18,7 +18,7 @@
     {% if not routeIsOneOf(['login', 'register', 'password.request', 'password.reset']) %}
         <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center py-3">
             <div class="flex-1 flex justify-between items-center">
-                <a href="/" class="text-xl font-medium"> 🚀 Alpas</a>
+                <a href="{{ route("walks.show_active") }}" class="text-xl font-medium"> 🚀 Alpas</a>
             </div>
 
             <label for="menu-toggle" class="pointer-cursor lg:hidden block">
