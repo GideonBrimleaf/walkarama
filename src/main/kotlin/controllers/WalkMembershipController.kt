@@ -1,5 +1,6 @@
 package com.radiantchamber.walkarama.controllers
 
+import com.radiantchamber.walkarama.entities.User
 import com.radiantchamber.walkarama.entities.Users
 import com.radiantchamber.walkarama.entities.WalkMemberships
 import com.radiantchamber.walkarama.entities.Walks
@@ -35,6 +36,18 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
         logWalkActivity(walk, mapOf("action" to "joined walk", "name" to walk.name), call, invitee)
         flash("success", "${invitee.name} <${invitee.email}> has joined your walk")
         call.redirect().back()
+    }
+
+    fun accept(call:HttpCall) {
+        val user = call.caller<User>()
+        val invite = WalkMemberships.findOne { it.id eq call.longParam("id").orAbort() }.orAbort()
+
+        if (user.id == invite.member.id) {
+            invite.accepted = true
+            invite.updatedAt = call.nowInCurrentTimezone().toInstant()
+        }
+
+        invite.flushChanges()
     }
 
     fun delete(call: HttpCall) {
