@@ -16,7 +16,7 @@ class AcceptWalkMiddleware : Middleware<HttpCall>() {
             WalkMemberships.findList { it.userId eq user.id }.filter { !it.accepted }
 
         if (pendingMemberships.isNotEmpty()) {
-            call.redirect().toRouteNamed("walks.show_active")
+            call.redirect().toRouteNamed("walks.accept_invite")
         } else {
             forward(call)
         }
