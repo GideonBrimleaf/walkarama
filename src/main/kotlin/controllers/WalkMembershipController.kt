@@ -38,17 +38,16 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
     }
 
     fun delete(call: HttpCall) {
-        val memberId = call.longParam("member_id").orAbort()
         val walk = Walks.findById(call.longParam("id").orAbort()).orAbort()
-        val member = Users.findById(memberId)
+        val member = Users.findById(call.longParam("member_id").orAbort()).orAbort()
 
         WalkMemberships.delete {
             it.walkId eq walk.id
-            it.userId eq memberId
+            it.userId eq member.id
         }
 
         logWalkActivity(walk, mapOf("action" to "left walk", "name" to walk.name), call, member)
-        flash("success", "${member?.name} <${member?.email}> has been removed from the walk")
+        flash("success", "${member.name} <${member.email}> has been removed from the walk")
         call.redirect().back()
     }
 }
