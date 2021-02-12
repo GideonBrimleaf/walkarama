@@ -45,9 +45,9 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
         if (user.id == invite.member.id) {
             invite.accepted = true
             invite.updatedAt = call.nowInCurrentTimezone().toInstant()
+            invite.flushChanges()
         }
 
-        invite.flushChanges()
         call.redirect().toRouteNamed("walks.show_active")
     }
 
