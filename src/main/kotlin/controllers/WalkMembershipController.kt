@@ -48,6 +48,7 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
         }
 
         invite.flushChanges()
+        call.redirect().toRouteNamed("walks.show_active")
     }
 
     fun delete(call: HttpCall) {
