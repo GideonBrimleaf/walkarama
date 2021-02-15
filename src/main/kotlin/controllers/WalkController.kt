@@ -12,12 +12,7 @@ import dev.alpas.routing.ControllerMiddleware
 import me.liuwj.ktorm.dsl.*
 import java.time.Instant
 
-class WalkController : Controller(), CanLogWalkActivity {
-    override fun middleware(call: HttpCall) = listOf(
-        ControllerMiddleware(VerifiedEmailOnlyMiddleware::class),
-        ControllerMiddleware(AcceptWalkMiddleware::class)
-    )
-
+class WalkController : ApplicationController(), CanLogWalkActivity {
     fun index(call: HttpCall) {
         val user = call.caller<User>()
         val walks = user.walks

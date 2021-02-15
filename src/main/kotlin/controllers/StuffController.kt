@@ -10,7 +10,7 @@ import me.liuwj.ktorm.dsl.delete
 import me.liuwj.ktorm.dsl.eq
 import me.liuwj.ktorm.entity.findAll
 
-class StuffController : Controller() {
+class StuffController : ApplicationController() {
     fun index(call: HttpCall) {
         val results = Stuffs.findAll()
         call.render("stuff", "things" to results)
