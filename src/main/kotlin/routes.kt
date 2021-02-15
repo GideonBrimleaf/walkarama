@@ -41,6 +41,7 @@ private fun RouteGroup.addWalksRoutes() {
     patch("/<id>/reactivate", WalkController::reactivate).name("reactivate")
     post("/<id>/membership", WalkMembershipController::add).name("membership_add")
     get("/<id>/membership/<member_id>", WalkMembershipController::show).name("membership_show")
+    patch("/<id>/membership/<member_id>", WalkMembershipController::accept).name("membership_accept")
     delete("/<id>/membership/<member_id>", WalkMembershipController::delete).name("membership_remove")
 }
 

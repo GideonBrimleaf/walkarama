@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
 //    TODO If invited - user should be redirected on all routes to a view to accept the invite
 //    TODO Need to add guard around walk invites
 //    TODO Either try mailer services or bin email verification
-//    TODO Remove redirect to welcome page on email verification
+//    TODO Remove redirect to welcome page on email verification - dependent on above
 //    TODO Make this actually look decent - progression bar for walk
 
 //    TODO Walk show page for archived walks - show map and activity list

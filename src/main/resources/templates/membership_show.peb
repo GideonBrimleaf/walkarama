@@ -12,8 +12,20 @@
                 archive.  If you don't want to join them that's fine - they'll understand you've got your own walking
                 plans!
             </p>
-            <a href="/walks/current">Accept</a>
-            <a href="/walks/current">No, thanks though!</a>
+            <form action="{{ route('walks.membership_accept', {"id": walk.id, "member_id": auth.user.id}) }}" method="POST">
+            {% csrf %}
+                <input type="hidden" name="_method" value="patch"/>
+                <button class="hover:text-green-800 text-green-600 text-sm uppercase hover-target">
+                    Accept
+                </button>
+            </form>
+            <form action="{{ route('walks.membership_remove', {"id": walk.id, "member_id": auth.user.id}) }}" method="POST">
+            {% csrf %}
+                <input type="hidden" name="_method" value="delete"/>
+                <button class="hover:text-red-800 text-red-600 text-sm uppercase hover-target">
+                    No, thanks though!
+                </button>
+            </form>
         </div>
     </div>
 {% endblock %}

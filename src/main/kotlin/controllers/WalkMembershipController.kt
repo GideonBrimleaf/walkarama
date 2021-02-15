@@ -29,12 +29,6 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
             it.updatedAt to now
         }
 
-        val activeWalk = invitee.walks.find { it.isActive }
-        if (activeWalk != null) {
-            activeWalk.isActive = false
-            activeWalk.flushChanges()
-        }
-
         logWalkActivity(walk, mapOf("action" to "invited to walk", "name" to walk.name), call, invitee)
         flash("success", "${invitee.name} <${invitee.email}> has joined your walk")
         call.redirect().back()
@@ -59,6 +53,12 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
             invite.flushChanges()
         }
 
+        val activeWalk = user.walks.find { it.isActive }
+        if (activeWalk != null) {
+            activeWalk.isActive = false
+            activeWalk.flushChanges()
+        }
+
         logWalkActivity(invitedWalk, mapOf("action" to "joined walk", "name" to invitedWalk.name), call)
         call.redirect().toRouteNamed("walks.show_active")
     }
@@ -74,6 +74,6 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
 
         logWalkActivity(walk, mapOf("action" to "left walk", "name" to walk.name), call, member)
         flash("success", "${member.name} <${member.email}> has been removed from the walk")
-        call.redirect().back()
+        call.redirect().toRouteNamed("walks.show_active")
     }
 }
