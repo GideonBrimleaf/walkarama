@@ -1,6 +1,7 @@
 package com.radiantchamber.walkarama.controllers
 
 import com.radiantchamber.walkarama.entities.*
+import com.radiantchamber.walkarama.middleware.AcceptWalkMiddleware
 import dev.alpas.auth.middleware.VerifiedEmailOnlyMiddleware
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
@@ -12,7 +13,10 @@ import me.liuwj.ktorm.dsl.*
 import java.time.Instant
 
 class WalkController : Controller(), CanLogWalkActivity {
-    override fun middleware(call: HttpCall) = listOf(ControllerMiddleware(VerifiedEmailOnlyMiddleware::class))
+    override fun middleware(call: HttpCall) = listOf(
+        ControllerMiddleware(VerifiedEmailOnlyMiddleware::class),
+        ControllerMiddleware(AcceptWalkMiddleware::class)
+    )
 
     fun index(call: HttpCall) {
         val user = call.caller<User>()

@@ -8,8 +8,10 @@ import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
 import dev.alpas.routing.Controller
+import me.liuwj.ktorm.dsl.and
 import me.liuwj.ktorm.dsl.delete
 import me.liuwj.ktorm.dsl.eq
+import me.liuwj.ktorm.dsl.not
 import me.liuwj.ktorm.entity.findById
 import me.liuwj.ktorm.entity.findOne
 
@@ -27,20 +29,29 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
             it.updatedAt to now
         }
 
-        val inviteeActiveWalk = invitee.walks.find { it.isActive }
-        if (inviteeActiveWalk != null) {
-            inviteeActiveWalk.isActive = false
-            inviteeActiveWalk.flushChanges()
+        val activeWalk = invitee.walks.find { it.isActive }
+        if (activeWalk != null) {
+            activeWalk.isActive = false
+            activeWalk.flushChanges()
         }
 
-        logWalkActivity(walk, mapOf("action" to "joined walk", "name" to walk.name), call, invitee)
+        logWalkActivity(walk, mapOf("action" to "invited to walk", "name" to walk.name), call, invitee)
         flash("success", "${invitee.name} <${invitee.email}> has joined your walk")
         call.redirect().back()
+    }
+
+    fun show(call: HttpCall) {
+        val user = call.caller<User>()
+        val walkId = call.longParam("id").orAbort()
+        val foundWalk = user.memberships.find { it.id == walkId }.orAbort()
+
+        call.render("membership_show", mapOf("walk" to foundWalk))
     }
 
     fun accept(call:HttpCall) {
         val user = call.caller<User>()
         val invite = WalkMemberships.findOne { it.id eq call.longParam("id").orAbort() }.orAbort()
+        val invitedWalk = Walks.findOne { it.id eq invite.walk.id }.orAbort()
 
         if (user.id == invite.member.id) {
             invite.accepted = true
@@ -48,6 +59,7 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
             invite.flushChanges()
         }
 
+        logWalkActivity(invitedWalk, mapOf("action" to "joined walk", "name" to invitedWalk.name), call)
         call.redirect().toRouteNamed("walks.show_active")
     }
 

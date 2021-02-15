@@ -25,7 +25,7 @@ private fun RouteGroup.webRoutesGroup() {
     group("/walks") {
         addWalksRoutes()
     }.name("walks").mustBeAuthenticated()
-    group("users") {
+    group("/users") {
         addUserRoutes()
     }.name("users").mustBeAuthenticated()
 }
@@ -40,6 +40,7 @@ private fun RouteGroup.addWalksRoutes() {
     patch("/<id>", WalkController::update).name("update")
     patch("/<id>/reactivate", WalkController::reactivate).name("reactivate")
     post("/<id>/membership", WalkMembershipController::add).name("membership_add")
+    get("/<id>/membership/<member_id>", WalkMembershipController::show).name("membership_show")
     delete("/<id>/membership/<member_id>", WalkMembershipController::delete).name("membership_remove")
 }
 

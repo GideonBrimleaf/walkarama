@@ -1,0 +1,11 @@
+{% extends "layout/app.peb" %}
+{% block content %}
+    <div class="h-screen">
+        <div class="bg-white max-w-4xl mt-10 mx-auto p-10 pt-10 w-full">
+            <h3 class="font-medium mb-3 text-2xl">Hello, {{ auth.user.name }}! </h3>
+            <p>{{ walk.owner.name }} ({{ walk.owner.email }}) has invited you to join them on their walk {{ walk.name }}</p>
+            <a href="/walks/current">Accept</a>
+            <a href="/walks/current">Delete</a>
+        </div>
+    </div>
+{% endblock %}
