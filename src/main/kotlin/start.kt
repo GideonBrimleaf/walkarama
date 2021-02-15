@@ -4,11 +4,10 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO If invited - user should be redirected on all routes to a view to accept the invite
-//    TODO Need to add guard around walk invites
+//    TODO Need to add guards around walk invites/deletes
 //    TODO Either try mailer services or bin email verification
 //    TODO Remove redirect to welcome page on email verification - dependent on above
-//    TODO Make this actually look decent - progression bar for walk
+//    TODO Make this actually look decent - progression bar for walk, sort out flash messages
 
 //    TODO Walk show page for archived walks - show map and activity list
 //    TODO Invite should be mailed out and accepted on request, this should show as pending for the inviter
