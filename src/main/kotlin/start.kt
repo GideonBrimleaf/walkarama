@@ -4,7 +4,6 @@ import dev.alpas.Alpas
 import java.io.File
 
 fun main(args: Array<String>) {
-//    TODO Need to add guards around walk invites/deletes
 //    TODO Either try mailer services or bin email verification
 //    TODO Remove redirect to welcome page on email verification - dependent on above
 //    TODO Make this actually look decent - progression bar for walk, sort out flash messages

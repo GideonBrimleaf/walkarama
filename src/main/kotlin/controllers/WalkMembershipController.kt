@@ -4,9 +4,11 @@ import com.radiantchamber.walkarama.entities.User
 import com.radiantchamber.walkarama.entities.Users
 import com.radiantchamber.walkarama.entities.WalkMemberships
 import com.radiantchamber.walkarama.entities.Walks
+import com.radiantchamber.walkarama.guards.WalkMembershipInvitationGuard
 import dev.alpas.http.HttpCall
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
+import dev.alpas.ozone.findOrFail
 import dev.alpas.routing.Controller
 import me.liuwj.ktorm.dsl.and
 import me.liuwj.ktorm.dsl.delete
@@ -17,21 +19,12 @@ import me.liuwj.ktorm.entity.findOne
 
 class WalkMembershipController : Controller(), CanLogWalkActivity {
     fun add(call: HttpCall) {
-        val now = call.nowInCurrentTimezone().toInstant()
-        val email = call.stringParam("email").orAbort()
-        val walk = Walks.findById(call.longParam("id").orAbort()).orAbort()
-        val invitee = Users.findOne {it.email eq email}.orAbort()
-
-       WalkMemberships.create {
-            it.walkId to walk.id
-            it.userId to invitee.id
-            it.createdAt to now
-            it.updatedAt to now
+        val foundWalk = Walks.findById(call.longParam("id").orAbort()).orAbort()
+        call.validateUsing(WalkMembershipInvitationGuard::class) {
+            val invitee = createMembership()
+            logWalkActivity(foundWalk, mapOf("action" to "invited to walk", "name" to foundWalk.name), call, invitee)
+            call.redirect().back()
         }
-
-        logWalkActivity(walk, mapOf("action" to "invited to walk", "name" to walk.name), call, invitee)
-        flash("success", "${invitee.name} <${invitee.email}> has joined your walk")
-        call.redirect().back()
     }
 
     fun show(call: HttpCall) {
@@ -44,14 +37,13 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
 
     fun accept(call:HttpCall) {
         val user = call.caller<User>()
-        val invite = WalkMemberships.findOne { it.id eq call.longParam("id").orAbort() }.orAbort()
-        val invitedWalk = Walks.findOne { it.id eq invite.walk.id }.orAbort()
+        val walkId = call.longParam("id").orAbort()
+        val invite = WalkMemberships.findOne { (it.walkId eq walkId) and (it.userId eq user.id) }.orAbort()
+        val invitedWalk = Walks.findById(walkId).orAbort()
 
-        if (user.id == invite.member.id) {
-            invite.accepted = true
-            invite.updatedAt = call.nowInCurrentTimezone().toInstant()
-            invite.flushChanges()
-        }
+        invite.accepted = true
+        invite.updatedAt = call.nowInCurrentTimezone().toInstant()
+        invite.flushChanges()
 
         val activeWalk = user.walks.find { it.isActive }
         if (activeWalk != null) {
@@ -64,8 +56,8 @@ class WalkMembershipController : Controller(), CanLogWalkActivity {
     }
 
     fun delete(call: HttpCall) {
-        val walk = Walks.findById(call.longParam("id").orAbort()).orAbort()
-        val member = Users.findById(call.longParam("member_id").orAbort()).orAbort()
+        val walk = Walks.findOrFail(call.longParam("id").orAbort())
+        val member = Users.findOrFail(call.longParam("member_id").orAbort())
 
         WalkMemberships.delete {
             it.walkId eq walk.id
