@@ -3,9 +3,17 @@
     <div class="h-screen">
         <div class="bg-white max-w-4xl mt-10 mx-auto p-10 pt-10 w-full">
             <h3 class="font-medium mb-3 text-2xl">Hello, {{ auth.user.name }}! </h3>
-            <p>{{ walk.owner.name }} ({{ walk.owner.email }}) has invited you to join them on their walk {{ walk.name }}</p>
+            <p>
+                {{ walk.owner.name }} ({{ walk.owner.email }}) has invited you to join them on their walk
+                {{ walk.name }}
+            </p>
+            <p>
+                If you accept, we'll bench any walks you were currently doing, you'll be able to find these in your
+                archive.  If you don't want to join them that's fine - they'll understand you've got your own walking
+                plans!
+            </p>
             <a href="/walks/current">Accept</a>
-            <a href="/walks/current">Delete</a>
+            <a href="/walks/current">No, thanks though!</a>
         </div>
     </div>
 {% endblock %}
