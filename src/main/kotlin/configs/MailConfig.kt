@@ -1,5 +1,6 @@
 package com.radiantchamber.walkarama.configs
 
+import com.radiantchamber.walkarama.mailers.SendGridMailDriver
 import dev.alpas.Environment
 import dev.alpas.mailing.drivers.LocalMailDriver
 import dev.alpas.mailing.drivers.SmtpDriver
@@ -11,5 +12,6 @@ class MailConfig(env: Environment) : BaseConfig(env) {
     init {
         addDriver("smtp", lazy { SmtpDriver(env) })
         addDriver("local", lazy { LocalMailDriver(env) })
+        addDriver("sendgrid", lazy { SendGridMailDriver(env) })
     }
 }
