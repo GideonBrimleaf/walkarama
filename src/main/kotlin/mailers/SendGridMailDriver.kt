@@ -11,7 +11,7 @@ class SendGridMailDriver(private val env:Environment): MailDriver {
         val connection = SendGrid(env("SEND_GRID_API_KEY"))
         val mailFrom = Email(env("MAIL_USERNAME"))
         val mailTo = Email(mail.to)
-        val content = Content("text/plain", mail.message)
+        val content = Content("text/html", mail.message)
         val message = Mail(mailFrom, mail.subject, mailTo, content)
         val request = Request()
 
