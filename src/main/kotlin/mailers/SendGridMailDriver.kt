@@ -20,9 +20,6 @@ class SendGridMailDriver(private val env:Environment): MailDriver {
             request.endpoint = "mail/send"
             request.body = message.build()
             val response = connection.api(request)
-            println(response.statusCode)
-            println(response.body)
-            println(response.headers)
         } catch (ex:IOException) {
             throw ex
         }
