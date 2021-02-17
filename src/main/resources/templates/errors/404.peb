@@ -17,7 +17,7 @@
         <h1 class="title"> 404 </h1>
         <h2 class="subtitle"> Page Not Found </h2>
         <div class="mx-auto my-10">
-            <img src="/404.svg" alt="Page not found!" width="460px">
+            <img src="/images/404.svg" alt="Page not found!" width="460px">
         </div>
         <div class="my-4 text leading-snug">
             <p>We made a few rounds looking everywhere for that page but we couldn't locate it.</p>

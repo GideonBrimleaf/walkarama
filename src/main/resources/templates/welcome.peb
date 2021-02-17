@@ -1,9 +1,9 @@
 {% extends "layout/base.peb" %}
 
 {% block content %}
-    <nav class="flex">
+    <nav class="bg-blue-300 flex">
         <div class="py-6 px-10 text-lg uppercase font-semibold">
-            <a>Walkarama</a>
+            <a href="/">Walkarama</a>
         </div>
         <div class="ml-auto py-6 px-10 text-lg uppercase font-semibold">
             <a class="hover:text-red-500" href="{{ route('login') }}">Log in</a>
@@ -11,7 +11,10 @@
         </div>
     </nav>
 
-    <main class="bg-purple-300 w-full flex-grow">
+    <main class="w-full flex flex-grow text-center items-center flex-col">
+        <div class="opacity-25">
+            <img src="/images/home-page-hero.jpg" alt="person walking in epic landscape">
+        </div>
         <h1>WELCOME TO WALKARAMA!</h1>
     </main>
 {% endblock %}

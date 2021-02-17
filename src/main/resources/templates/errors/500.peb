@@ -22,7 +22,7 @@
         {% else %}
 
             <div class="mx-auto my-10">
-                <img src="/500.svg" alt="Server Error!" width="460px">
+                <img src="/images/500.svg" alt="Server Error!" width="460px">
             </div>
             <div class="my-4 text leading-snug">
                 <p>Uh, oh! We ran into an issue.</p>
