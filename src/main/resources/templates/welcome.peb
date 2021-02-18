@@ -14,7 +14,12 @@
     <main class="w-screen min-h-2/3 bg-cover bg-home-page-hero bg-no-repeat">
         <h1 class="inline-block bg-white bg-opacity-25 p-4 rounded-md my-16 mx-8 text-5xl">WELCOME TO WALKARAMA!</h1>
     </main>
-    <section class="bg-blue-300 block ">
-
+    <section class="bg-blue-300 flex">
+        <p class="inline">Pick a Walk</p>
+        <i class="fas fa-map-marked-alt"></i>
+        <p class="inline">Add Some Steps</p>
+        <i class="fas fa-walking"></i>
+        <p class="inline">Invite a Friend for the Ride!</p>
+        <i class="fas fa-people-arrows"></i>
     </section>
 {% endblock %}

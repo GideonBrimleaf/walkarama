@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="https://kit.fontawesome.com/cc2f9fa713.js" crossorigin="anonymous"></script>
     <title>🚀 Alpas</title>
     <style>
         #menu-toggle:checked + #menu {
