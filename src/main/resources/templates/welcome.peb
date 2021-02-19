@@ -15,18 +15,18 @@
         <h1 class="inline-block bg-white bg-opacity-25 p-4 rounded-md my-16 mx-8 text-5xl">WELCOME TO WALKARAMA!</h1>
     </main>
     <aside class="bg-blue-300 flex flex-grow justify-around items-center text-3xl">
-        <div class="text-center bg-white bg-opacity-25 rounded-md py-6 px-10 my-4">
+        <section class="text-center bg-white bg-opacity-25 rounded-md py-6 px-10 my-4">
             <h2>Pick a Walk</h2>
             <i class="fas fa-map-marked-alt"></i>
-        </div>
-        <div class="text-center bg-white bg-opacity-25 rounded-md py-6 px-10 my-4">
+        </section>
+        <section class="text-center bg-white bg-opacity-25 rounded-md py-6 px-10 my-4">
             <h2>Add Some Steps</h2>
             <i class="fas fa-walking"></i>
-        </div>
-        <div class="text-center bg-white bg-opacity-25 rounded-md py-6 px-10 my-4">
+        </section>
+        <section class="text-center bg-white bg-opacity-25 rounded-md py-6 px-10 my-4">
             <h2>Invite a Friend</h2>
             <i class="fas fa-people-arrows"></i>
-        </div>
+        </section>
     </aside>
     {% include "partials/footer.peb" %}
 {% endblock %}
