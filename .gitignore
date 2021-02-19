@@ -47,3 +47,5 @@ storage/src
 !gradle/wrapper
 
 storage/mails
+
+colour_palette.txt
