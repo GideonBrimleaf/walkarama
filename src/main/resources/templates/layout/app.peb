@@ -101,6 +101,7 @@
     <main>
         {% block content %} {% endblock %}
     </main>
+    {% include "partials/footer.peb" %}
 </div>
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
