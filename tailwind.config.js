@@ -7,6 +7,7 @@ module.exports = {
         }),
         minHeight: {
          '2/3': '66vh',
+         '3/4': '75vh',
         },
         screens: {
           'sm': '640px',
