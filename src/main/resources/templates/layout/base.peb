@@ -11,7 +11,7 @@
     </head>
 
     <body>
-        <div id="app" class="flex h-screen m-auto flex-col">
+        <div id="app" class="h-screen m-auto xl:flex xl:flex-col">
             {% block content %}
 
             {% endblock %}
