@@ -1,5 +1,5 @@
-<a href="/" class="text-5xl font-thin text-center my-10 flex justify-center items-center">
-    <div class="ml-2">{{ env('APP_NAME', 'Alpas') }}</div>
+<a href="/" class="text-5xl font-thin text-center py-10 flex justify-center items-center">
+    <div class="ml-2">{{ env('APP_NAME', 'Alpas') | capitalize }}</div>
 </a>
 
 {% if hasFlash('success') %}
