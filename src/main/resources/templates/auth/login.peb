@@ -3,7 +3,7 @@
 
 <div class="w-full max-w-md mx-auto">
     {% include "./_header.peb" %}
-    <form class="bg-white p-8 mx-auto bg-white shadow-md rounded mb-28.25 {{ errors.isEmpty() ? '' : 'border-red-500 border' }}"
+    <form class="bg-white bg-opacity-50 p-8 mx-auto bg-white shadow-md rounded mb-28 {{ errors.isEmpty() ? '' : 'border-red-500 border' }}"
           method="POST" action="{{ route('login') }}">
         {% csrf %}
         <div class="pb-8 text-indigo-600">

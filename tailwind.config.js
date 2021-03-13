@@ -13,7 +13,7 @@ module.exports = {
           '95': '95vh'
         },
         margin: {
-         '28.25': '7.25rem',
+         '28': '7rem',
         },
         screens: {
           'sm': '640px',
