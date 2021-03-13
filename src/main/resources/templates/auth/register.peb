@@ -1,7 +1,6 @@
 {% extends "../layout/app.peb" %}
 {% block content %}
 
-    <div class="h-screen py-10">
         <div class="w-full max-w-md mx-auto">
             {% include "./_header.peb" %}
             <form class="bg-white p-8 mx-auto bg-white shadow-md rounded mb-4 {{ errors.isEmpty() ? '' : 'border-red-500 border' }}"
@@ -59,6 +58,5 @@
                 </div>
             </form>
         </div>
-    </div>
 
 {% endblock %}

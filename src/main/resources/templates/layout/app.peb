@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="https://kit.fontawesome.com/cc2f9fa713.js" crossorigin="anonymous"></script>
-    <title>🚀 Alpas</title>
+    <title>Walkarama - The Collaborative Walking Challenge</title>
     <style>
         #menu-toggle:checked + #menu {
             display: block;
@@ -101,8 +101,9 @@
     <main>
         {% block content %} {% endblock %}
     </main>
-    {% include "partials/footer.peb" %}
+
 </div>
+    {% include "partials/footer.peb" %}
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
