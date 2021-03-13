@@ -8,6 +8,7 @@ module.exports = {
         minHeight: {
          '2/3': '66vh',
          '3/4': '75vh',
+         '9.8/10': '98vh'
         },
         height: {
           '95': '95vh'

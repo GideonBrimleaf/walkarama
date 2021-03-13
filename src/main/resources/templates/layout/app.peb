@@ -97,7 +97,7 @@
             </div>
         </header>
     {% endif %}
-    <main>
+    <main class="min-h-9.8/10">
         {% block content %} {% endblock %}
     </main>
     {% include "partials/footer.peb" %}
