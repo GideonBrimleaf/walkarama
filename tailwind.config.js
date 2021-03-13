@@ -12,6 +12,9 @@ module.exports = {
         height: {
           '95': '95vh'
         },
+        margin: {
+         '28.25': '7.25rem',
+        },
         screens: {
           'sm': '640px',
           // => @media (min-width: 640px) { ... }
