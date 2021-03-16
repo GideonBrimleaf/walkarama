@@ -11938,6 +11938,10 @@ body {
   min-height: 75vh;
 }
 
+.min-h-9\.2\/10 {
+  min-height: 92vh;
+}
+
 .min-h-9\.8\/10 {
   min-height: 98vh;
 }
@@ -33051,6 +33055,10 @@ body {
     min-height: 75vh;
   }
 
+  .sm\:min-h-9\.2\/10 {
+    min-height: 92vh;
+  }
+
   .sm\:min-h-9\.8\/10 {
     min-height: 98vh;
   }
@@ -54097,6 +54105,10 @@ body {
 
   .md\:min-h-3\/4 {
     min-height: 75vh;
+  }
+
+  .md\:min-h-9\.2\/10 {
+    min-height: 92vh;
   }
 
   .md\:min-h-9\.8\/10 {
@@ -75147,6 +75159,10 @@ body {
     min-height: 75vh;
   }
 
+  .lg\:min-h-9\.2\/10 {
+    min-height: 92vh;
+  }
+
   .lg\:min-h-9\.8\/10 {
     min-height: 98vh;
   }
@@ -96195,6 +96211,10 @@ body {
     min-height: 75vh;
   }
 
+  .xl\:min-h-9\.2\/10 {
+    min-height: 92vh;
+  }
+
   .xl\:min-h-9\.8\/10 {
     min-height: 98vh;
   }
@@ -117241,6 +117261,10 @@ body {
 
   .\32xl\:min-h-3\/4 {
     min-height: 75vh;
+  }
+
+  .\32xl\:min-h-9\.2\/10 {
+    min-height: 92vh;
   }
 
   .\32xl\:min-h-9\.8\/10 {

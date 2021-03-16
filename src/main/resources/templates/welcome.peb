@@ -11,8 +11,26 @@
         </div>
     </nav>
 
-    <main class="py-4 w-screen min-h-2/3 bg-cover bg-home-page-hero bg-no-repeat flex-col lg:min-h-3/4">
+    <main class="py-4 w-screen min-h-9.2/10 bg-cover bg-home-page-hero bg-no-repeat flex-col">
         <h1 class="inline-block text-center bg-white bg-opacity-50 p-4 rounded-md mx-8 my-4 text-xl sm:text-3xl md:text-5xl">WELCOME TO WALKARAMA!</h1>
+        <aside class="grid grid-cols-2 gap-4 p-4 sm:text-2xl md:text-3xl 2xl:flex 2xl:justify-around 2xl:items-center">
+            <section class="text-center bg-white bg-opacity-50 rounded-md py-4 px-4 my-4 flex items-center justify-center sm:py-6 sm:px-10">
+                <h2 class="mr-4">Pick a Walk</h2>
+                <i class="mt-1 fas fa-map-marked-alt"></i>
+            </section>
+            <section class="text-center bg-white bg-opacity-50 rounded-md py-4 px-4 sm:py-6 sm:px-10 my-4 flex items-center justify-center">
+                <h2 class="mr-4">Add Some Steps</h2>
+                <i class="mt-1 fas fa-walking"></i>
+            </section>
+            <section class="text-center bg-white bg-opacity-50 rounded-md py-4 px-4 sm:py-6 sm:px-10 my-4 flex items-center justify-center">
+                <h2 class="mr-4">Invite a Friend</h2>
+                <i class="mt-1 fas fa-people-arrows"></i>
+            </section>
+            <section class="text-center bg-white bg-opacity-50 rounded-md py-4 px-4 sm:py-6 sm:px-10 my-4 flex items-center justify-center">
+                <h2 class="mr-4">Walk the World!</h2>
+                <i class="fas fa-globe-europe"></i>
+            </section>
+        </aside>
         <form class="px-8 py-2 mr-8 md:mr-auto ml-8 bg-white bg-opacity-50 shadow-md rounded mb-4 max-w-xl
             {{ errors.isEmpty() ? '' : 'border-red-500 border' }}" method="POST" action="{{ route('register') }}">
             <label class="block text-gray-700 font-bold my-2" for="name"> Name </label>
@@ -51,23 +69,5 @@
             </div>
         </form>
     </main>
-    <aside class="bg-blue-300 grid grid-cols-2 gap-4 p-4 sm:text-2xl md:text-3xl 2xl:flex 2xl:justify-around 2xl:items-center">
-        <section class="text-center bg-white bg-opacity-25 rounded-md py-4 px-4 my-4 flex items-center justify-center sm:py-6 sm:px-10">
-            <h2 class="mr-4">Pick a Walk</h2>
-            <i class="mt-1 fas fa-map-marked-alt"></i>
-        </section>
-        <section class="text-center bg-white bg-opacity-25 rounded-md py-4 px-4 sm:py-6 sm:px-10 my-4 flex items-center justify-center">
-            <h2 class="mr-4">Add Some Steps</h2>
-            <i class="mt-1 fas fa-walking"></i>
-        </section>
-        <section class="text-center bg-white bg-opacity-25 rounded-md py-4 px-4 sm:py-6 sm:px-10 my-4 flex items-center justify-center">
-            <h2 class="mr-4">Invite a Friend</h2>
-            <i class="mt-1 fas fa-people-arrows"></i>
-        </section>
-        <section class="text-center bg-white bg-opacity-25 rounded-md py-4 px-4 sm:py-6 sm:px-10 my-4 flex items-center justify-center">
-            <h2 class="mr-4">Walk the World!</h2>
-            <i class="fas fa-globe-europe"></i>
-        </section>
-    </aside>
     {% include "partials/footer.peb" %}
 {% endblock %}
