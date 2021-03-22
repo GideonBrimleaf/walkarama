@@ -13,21 +13,21 @@
 
     <main class="w-screen min-h-9.2/10 bg-cover bg-home-page-hero bg-no-repeat flex flex-col">
         <div class="bg-white bg-opacity-50 xl:w-5/12 md:w-9/12  p-4 flex-grow flex flex-col items-center">
-            <h1 class="inline-block text-center p-4 rounded-md mx-8 my-4 text-xl sm:text-3xl md:text-5xl">WELCOME TO WALKARAMA!</h1>
-            <section class="px-8 grid grid-cols-2 gap-4 mb-8 text-xl max-w-xl">
-                <div class="flex justify-center">
-                    <h2 class="mr-4 inline-block">Pick a Walk</h2>
+            <h1 class="inline-block text-center p-4 rounded-md mx-8 my-4 text-2xl sm:text-3xl md:text-5xl">WELCOME TO WALKARAMA!</h1>
+            <section class="sm:px-8 grid grid-cols-2 gap-4 mb-8 sm:text-xl max-w-xl">
+                <div class="flex justify-center items-center">
+                    <h2 class="mr-4 inline-block">Pick Your Walk</h2>
                     <i class="fas fa-map-marked-alt"></i>
                 </div>
-                <div class="flex justify-center">
+                <div class="flex justify-center items-center">
                     <h2 class="mr-4 inline-block">Add Some Steps</h2>
                     <i class="fas fa-shoe-prints"></i>
                 </div>
-                <div class="flex justify-center">
+                <div class="flex justify-center items-center">
                     <h2 class="mr-4 inline-block">Invite a Friend</h2>
                     <i class="fas fa-people-arrows"></i>
                 </div>
-                <div class="flex justify-center">
+                <div class="flex justify-center items-center">
                     <h2 class="mr-4 inline-block">Walk the World!</h2>
                     <i class="fas fa-globe-europe"></i>
                 </div>
