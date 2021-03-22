@@ -11951,7 +11951,19 @@ body {
 }
 
 .min-w-full {
-  min-width: 100%;
+  min-width: 100vw;
+}
+
+.min-w-1\/4 {
+  min-width: 2vw;
+}
+
+.min-w-1\/2 {
+  min-width: 50vw;
+}
+
+.min-w-3\/4 {
+  min-width: 75vw;
 }
 
 .object-contain {
@@ -33068,7 +33080,19 @@ body {
   }
 
   .sm\:min-w-full {
-    min-width: 100%;
+    min-width: 100vw;
+  }
+
+  .sm\:min-w-1\/4 {
+    min-width: 2vw;
+  }
+
+  .sm\:min-w-1\/2 {
+    min-width: 50vw;
+  }
+
+  .sm\:min-w-3\/4 {
+    min-width: 75vw;
   }
 
   .sm\:object-contain {
@@ -54120,7 +54144,19 @@ body {
   }
 
   .md\:min-w-full {
-    min-width: 100%;
+    min-width: 100vw;
+  }
+
+  .md\:min-w-1\/4 {
+    min-width: 2vw;
+  }
+
+  .md\:min-w-1\/2 {
+    min-width: 50vw;
+  }
+
+  .md\:min-w-3\/4 {
+    min-width: 75vw;
   }
 
   .md\:object-contain {
@@ -75172,7 +75208,19 @@ body {
   }
 
   .lg\:min-w-full {
-    min-width: 100%;
+    min-width: 100vw;
+  }
+
+  .lg\:min-w-1\/4 {
+    min-width: 2vw;
+  }
+
+  .lg\:min-w-1\/2 {
+    min-width: 50vw;
+  }
+
+  .lg\:min-w-3\/4 {
+    min-width: 75vw;
   }
 
   .lg\:object-contain {
@@ -96224,7 +96272,19 @@ body {
   }
 
   .xl\:min-w-full {
-    min-width: 100%;
+    min-width: 100vw;
+  }
+
+  .xl\:min-w-1\/4 {
+    min-width: 2vw;
+  }
+
+  .xl\:min-w-1\/2 {
+    min-width: 50vw;
+  }
+
+  .xl\:min-w-3\/4 {
+    min-width: 75vw;
   }
 
   .xl\:object-contain {
@@ -117276,7 +117336,19 @@ body {
   }
 
   .\32xl\:min-w-full {
-    min-width: 100%;
+    min-width: 100vw;
+  }
+
+  .\32xl\:min-w-1\/4 {
+    min-width: 2vw;
+  }
+
+  .\32xl\:min-w-1\/2 {
+    min-width: 50vw;
+  }
+
+  .\32xl\:min-w-3\/4 {
+    min-width: 75vw;
   }
 
   .\32xl\:object-contain {

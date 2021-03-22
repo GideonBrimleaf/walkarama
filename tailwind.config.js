@@ -11,6 +11,13 @@ module.exports = {
          '9.2/10': '92vh',
          '9.8/10': '98vh'
         },
+        minWidth: {
+         '0': '0',
+         '1/4': '2vw',
+         '1/2': '50vw',
+         '3/4': '75vw',
+         'full': '100vw',
+        },
         height: {
           '95': '95vh'
         },
@@ -19,19 +26,10 @@ module.exports = {
         },
         screens: {
           'sm': '640px',
-          // => @media (min-width: 640px) { ... }
-
           'md': '768px',
-          // => @media (min-width: 768px) { ... }
-
           'lg': '1024px',
-          // => @media (min-width: 1024px) { ... }
-
           'xl': '1280px',
-          // => @media (min-width: 1280px) { ... }
-
           '2xl': '1536px',
-          // => @media (min-width: 1536px) { ... }
         }
       }
      },
