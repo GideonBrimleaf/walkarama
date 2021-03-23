@@ -1,4 +1,4 @@
-{% extends "../layout/app.peb" %}
+{% extends "../layout/auth.peb" %}
 {% block content %}
 
         <div class="w-full max-w-md mx-auto header">
