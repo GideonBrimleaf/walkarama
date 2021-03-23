@@ -14,7 +14,7 @@
     </style>
 </head>
 
-<body class="antialiased bg-gray-200 bg-home-page-hero bg-auto">
+<body class="antialiased bg-gray-200 bg-cover bg-home-page-hero bg-no-repeat bg-auto">
     {% if not routeIsOneOf(['login', 'register', 'password.request', 'password.reset']) %}
         <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center py-3">
             <div class="flex-1 flex justify-between items-center">
