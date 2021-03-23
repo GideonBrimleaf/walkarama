@@ -17,7 +17,7 @@
 <body class="antialiased bg-gray-200 bg-auto">
 <div id="app">
     {% if not routeIsOneOf(['login', 'register', 'password.request', 'password.reset']) %}
-        <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center py-3">
+        <header class="lg:px-16 px-6 bg-blue-300 flex flex-wrap items-center py-3">
             <div class="flex-1 flex justify-between items-center">
                 <a href="{{ route("walks.show_active") }}" class="text-xl font-medium">Walkarama</a>
             </div>
@@ -98,7 +98,7 @@
             </div>
         </header>
     {% endif %}
-    <main class="min-h-9.8/10">
+    <main class="min-h-9.2/10 bg-yellow-100">
         {% block content %} {% endblock %}
     </main>
 </div>

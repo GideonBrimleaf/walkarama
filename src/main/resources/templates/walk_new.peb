@@ -2,7 +2,7 @@
 
     {% block content %}
         <main>
-            <h1>Create a New Walk</h1>
+            <h1 class="inline-block text-center p-4 rounded-md mx-8 my-4 text-2xl sm:text-3xl">Create a New Walk</h1>
             <google-map></google-map>
         </main>
     {% endblock %}
